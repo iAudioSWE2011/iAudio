@@ -8,7 +8,8 @@ class LoginController extends Zend_Controller_Action
 
     public function init()
     {
-        session_start();
+        date_default_timezone_set('Europe/Berlin');
+    	session_start();
     }
     
     public function indexAction()
