@@ -1,0 +1,58 @@
+<?php
+session_start();
+include_once('scripts/functions.php');
+
+$_SESSION['navi'] = "";
+
+?>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>iAudio</title>
+    <link rel="stylesheet" type="text/css" href="scripts/main.css">
+  </head>
+
+  <body>
+    
+    <div id="container">
+      
+      <?php
+        if($this->sessionset)
+      		include('navi_login.php');
+      	else
+      		include('navi_default.php');
+      ?>
+     
+      <div id="main" class="portrait">     
+
+          <div class="normal">
+
+              <div class="big">Haftungsausschluss</div>
+              
+            	<div class="ueberschrift_klein">1. Inhalt des Onlineangebotes</div>
+            
+            	Der Webmaster &uuml;bernimmt keinerlei Gew&auml;hr f&uuml;r die Aktualit&auml;t, Korrektheit, Vollst&auml;ndigkeit oder Qualit&auml;t der bereitgestellten Informationen. Haftungsanspr&uuml;che gegen den Webmaster , welche sich auf Sch&auml;den materieller oder ideeller Art beziehen, die durch die Nutzung oder Nichtnutzung der dargebotenen Informationen bzw. durch die Nutzung fehlerhafter und unvollst&auml;ndiger Informationen verursacht wurden, sind grunds&auml;tzlich ausgeschlossen, sofern seitens des Webmasters kein nachweislich vors&auml;tzliches oder grob fahrl&auml;ssiges Verschulden vorliegt. Der Webmaster beh&auml;lt es sich ausdr&uuml;cklich vor, Teile der Seiten oder das gesamte Angebot ohne vorherige Ank&uuml;ndigung zu ver&auml;ndern, zu erg&auml;nzen, zu l&ouml;schen oder die Ver&ouml;ffentlichung zeitweise oder endg&uuml;ltig einzustellen. Sofern innerhalb des Internetangebotes die M&ouml;glichkeit zur Eingabe pers&ouml;nlicher oder gesch&auml;ftlicher Daten (Emailadressen, Namen, Anschriften) besteht, so erfolgt die Preisgabe dieser Daten seitens des Nutzers auf ausdr&uuml;cklich freiwilliger Basis.
+            	
+            	<div class="ueberschrift_klein">2. Verweise und Links</div>
+    
+            	Bei direkten oder indirekten Verweisen auf fremde Internetseiten ("Links"), die au&szlig;erhalb des Verantwortungsbereiches des Webmasters liegen, tritt eine Haftungsverpflichtung ausschlie&szlig;lich in dem Fall in Kraft, in dem der Webmaster von den Inhalten Kenntnis hat und es ihr technisch m&ouml;glich und zumutbar ist, die Nutzung im Falle rechtswidriger Inhalte zu verhindern. Der Webmaster erkl&auml;rt daher ausdr&uuml;cklich, dass zum Zeitpunkt der Linksetzung die entsprechenden verlinkten Seiten frei von illegalen Inhalten waren. Der Webmaster hat keinerlei Einfluss auf die aktuelle und zuk&uuml;nftige Gestaltung und auf die Inhalte der gelinkten Seiten. Deshalb distanziert er sich hiermit ausdr&uuml;cklich von allen Inhalten aller gelinkten Seiten, die nach der Linksetzung ver&auml;ndert wurden. Diese Feststellung gilt f&uuml;r alle innerhalb des eigenen Internetangebotes gesetzten Links und Verweise. F&uuml;r illegale, fehlerhafte oder unvollst&auml;ndige Inhalte und insbesondere f&uuml;r Sch&auml;den, die aus der Nutzung oder Nichtnutzung solcherart dargebotener Informationen entstehen, haftet allein der Anbieter der Seite, auf welche verwiesen wurde, nicht derjenige, der &uuml;ber Links auf die jeweilige Ver&ouml;ffentlichung lediglich verweist.
+                          	
+            	<div class="ueberschrift_klein">3. Urheber- und Kennzeichenrecht</div>
+            	
+            	Alle innerhalb des Internetangebotes genannten und ggf. durch Dritte gesch&uuml;tzten Marken- und Warenzeichen unterliegen uneingeschr&auml;nkt den Bestimmungen des jeweils g&uuml;ltigen Kennzeichenrechts und den Besitzrechten der jeweiligen eingetragenen Eigent&uuml;mer.
+            	
+            	<div class="ueberschrift_klein">4. Rechtswirksamkeit dieses Haftungsausschlusses</div>
+            	
+            	Dieser Haftungsausschluss ist als Teil des Internetangebotes zu betrachten, von dem aus auf diese Seite verwiesen wurde. Sofern Teile oder einzelne Formulierungen dieses Textes der geltenden Rechtslage nicht, nicht mehr oder nicht vollst&auml;ndig entsprechen sollten, bleiben die &uuml;brigen Teile des Dokumentes in ihrem Inhalt und ihrer G&uuml;ltigkeit davon unber&uuml;hrt.
+          </div>
+      
+      </div>
+    
+    </div>
+    
+  </body>
+  
+</html>
