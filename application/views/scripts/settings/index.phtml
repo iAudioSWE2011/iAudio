@@ -28,9 +28,64 @@ $_SESSION['navi'] = "";
       
           <p class="big"><u>Settings</u></p>
           
+          <?php
+          if(!empty($_REQUEST["savedMail"]) && $_REQUEST["savedMail"] == "true")
+          {
+          	  echo '<p style="color: green; font-style: italic; font-weight: bold;">
+          	  		E-Mailadresse erfolgreich geändert
+          	  		</p>';
+          }	
+          else
+          {
+          	  echo '<p style="color: red; font-style: italic; font-weight: bold;">';
+	          
+          	  if(!empty($_REQUEST["invalid"]) && $_REQUEST["invalid"] == "true")
+	              echo 'Die neue Mailadresse ist ungültig!';
+	          else if(!empty($_REQUEST["newMail"]) && $_REQUEST["newMail"] == "false")
+	              echo 'Das neuen Mailadressen stimmen nicht überein!';
+	          else if(!empty($_REQUEST["registered"]) && $_REQUEST["registered"] == "true")
+	              echo 'Die neue Mailadresse ist bereits registriert!';
+	          else
+	              echo '&nbsp;';
+	              
+	          echo '</p>';
+          }
+          ?>
+          
+         		 <form action="/Settings/mail" enctype="multipart/form-data" method="post" name="options" AUTOCOMPLETE = "off">
+              		<table columns="3">
+                      <tr>
+                        <td colspan="3"><b>E-Mailadresse</b></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">jetzige E-Mail: </td>
+                        <td><?php echo $this->currentMail; ?></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">neue E-Mail: </td>
+                        <td><input type="text" name="mail"></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">neue E-Mail wiederholen: </td>
+                        <td><input type="text" name="mail_check"></td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><input type="hidden" name="mail_old" value="<?php echo $this->currentMail; ?>"></td>
+                      </tr>
+                      <tr>
+                        <td><input name="register" type="submit" value="E-Mail ändern"></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                    </table>
+              	</form>
+              	
+             <br><br>
           
           <?php
-          if(!empty($_REQUEST["saved"]) && $_REQUEST["saved"] == "true")
+          if(!empty($_REQUEST["savedPW"]) && $_REQUEST["savedPW"] == "true")
           {
           	  echo '<p style="color: green; font-style: italic; font-weight: bold;">
           	  		Passwort erfolgreich geändert
@@ -51,18 +106,21 @@ $_SESSION['navi'] = "";
           }
           ?>
           
-          <form action="/Settings/password" enctype="multipart/form-data" method="post" name="options" AUTOCOMPLETE = "off">
+         		 <form action="/Settings/password" enctype="multipart/form-data" method="post" name="options" AUTOCOMPLETE = "off">
               		<table columns="3">
                       <tr>
-                        <td colspan="2">Altes Passwort: </td>
+                        <td colspan="3"><b>Passwort</b></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">jetziges Passwort: </td>
                         <td><input type="password" name="pw_old"></td>
                       </tr>
                       <tr>
-                        <td colspan="2">Neues Passwort: </td>
+                        <td colspan="2">neues Passwort: </td>
                         <td><input type="password" name="pw"></td>
                       </tr>
                       <tr>
-                        <td colspan="2">Neues Passwort wiederholen: </td>
+                        <td colspan="2">neues Passwort wiederholen: </td>
                         <td><input type="password" name="pw_check"></td>
                       </tr>
                       <tr>
@@ -72,6 +130,51 @@ $_SESSION['navi'] = "";
                       </tr>
                       <tr>
                         <td><input name="register" type="submit" value="Passwort ändern"></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                    </table>
+              	</form>
+              	
+             <br><br>
+             
+             <?php
+          if(!empty($_REQUEST["savedStream"]) && $_REQUEST["savedStream"] == "true")
+          {
+          	  echo '<p style="color: green; font-style: italic; font-weight: bold;">
+          	  		Streamingrate erfolgreich geändert
+          	  		</p>';
+          }	
+          else
+          {
+          	  echo '<p style="color: red; font-style: italic; font-weight: bold;">&nbsp;</p>';
+          }
+          ?>
+          
+         		 <form action="/Settings/stream" enctype="multipart/form-data" method="post" name="options" AUTOCOMPLETE = "off">
+              		<table columns="3">
+                      <tr>
+                        <td colspan="3"><b>Streamingrate</b></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">64kbit/s: </td>
+                        <td><input type="Radio" name="streamingrate" value="64" <?php if($this->currentRate == 64) echo 'checked';?>></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">128kbit/s: </td>
+                        <td><input type="Radio" name="streamingrate" value="128" <?php if($this->currentRate == 128) echo 'checked';?>></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">192kbit/s: </td>
+                        <td><input type="Radio" name="streamingrate" value="192" <?php if($this->currentRate == 192) echo 'checked';?>></td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td><input name="change" type="submit" value="Bitrate ändern"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                       </tr>
