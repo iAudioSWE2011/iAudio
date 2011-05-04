@@ -14,7 +14,7 @@ class LoginController extends Zend_Controller_Action
     
     public function indexAction()
     {   	
-    	$this->view->variable = $this->_getParam('Error');;
+    	$this->view->variable = $this->_getParam('Error');
     }
 
     public function saveAction()
