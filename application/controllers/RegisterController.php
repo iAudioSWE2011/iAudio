@@ -36,9 +36,13 @@ class RegisterController extends Zend_Controller_Action
     	{
     		$this->_redirect('/Register?Error=pw&name='.urlencode($name).'&mail='.urlencode($mail));
     	}
+    	else if ($user->userExists($mail))
+    	{
+    		$this->_redirect('/Register?Error=exists&name='.urlencode($name));
+    	}
     	else
     	{
-   		
+   			
     		//Insert new User into Database
 	    	$user->createNewUser($name, $mail, $pw);
 	

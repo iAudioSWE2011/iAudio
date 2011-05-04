@@ -35,6 +35,8 @@ $_SESSION['navi'] = "";
               echo 'Bitte Eingaben überprüfen!';
           else if(!empty($_REQUEST["Error"]) && $_REQUEST["Error"] == "pw")
               echo 'Passwörter stimmen nicht überein!';
+          else if(!empty($_REQUEST["Error"]) && $_REQUEST["Error"] == "exists")
+              echo 'E-Mailadresse bereits registriert!';
           else
               echo '&nbsp;';
           ?>

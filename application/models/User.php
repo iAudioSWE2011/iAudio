@@ -173,6 +173,8 @@ class User extends Zend_Db_Table_Abstract {
 	 * @param string $name Name des Users
 	 * @param string $mail Mailadresse
 	 * @param string $pw Passwort
+	 * 
+	 * @return int: ID des neuen users
 	 */
 	public function createNewUser($name, $mail, $pw) {
 		
@@ -191,6 +193,22 @@ class User extends Zend_Db_Table_Abstract {
         $row->save();
         
         return $amount;
+	}
+	
+	/**
+	 * Testet, ob es schon einen User mit der E-Mailadresse gibt
+	 * 
+	 * @param string $mail Mailadresse
+	 * 
+	 * @return bool: User existiert oder nicht
+	 */
+	public function userExists($mail)
+	{
+		 $row = $this->fetchRow(
+	        	$this->select()->where('mail = ?', $mail)
+	           );
+	           
+	     return (count($row)>0);    
 	}
 	
 }
