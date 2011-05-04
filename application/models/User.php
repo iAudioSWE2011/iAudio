@@ -22,10 +22,10 @@ class User extends Zend_Db_Table_Abstract {
 	 * 
 	 * @param int $id UserID
 	 */
-	public function getIDByNameAndMail($name,$mail) {
+	public function getIDByMail($mail) {
 		
 		// Zeile suchen, in der die ID gefunden wird
-		$row = $this->fetchRow($this->select()->where('Name = ?', $name)->where('Mail = ?', $mail));
+		$row = $this->fetchRow($this->select()->where('Mail = ?', $mail));
 		
 		// Es wurde ein Eintrag gefunden
 		if($row) {
@@ -109,15 +109,39 @@ class User extends Zend_Db_Table_Abstract {
 	}
 	
 	/**
-	 * Holt das Passwort eines User per ID
+	 * Überprüft das Passwort eines User per Mail
 	 * 
 	 * @param string $mail Email des Users
 	 * @param string $pw eingegebenes Passwort
 	 */
-	public function getCheckPassword($mail, $pw) {
+	public function checkPasswordByMail($mail, $pw) {
 		
 		// Zeile suchen, in der die ID gefunden wird
 		$row = $this->fetchRow($this->select()->where('Mail = ?', $mail));
+		
+		// Es wurde ein Eintrag gefunden
+		if($row) {
+			$savedPW = $row->PW;
+		}
+		
+		$givenPW = md5($pw);
+		
+		if($savedPW == $givenPW)
+			return true;
+			
+		return false;
+	}
+	
+	/**
+	 * Überprüft das Passwort eines User per ID
+	 * 
+	 * @param string $id ID des Users
+	 * @param string $pw eingegebenes Passwort
+	 */
+	public function checkPasswordByID($id, $pw) {
+		
+		// Zeile suchen, in der die ID gefunden wird
+		$row = $this->fetchRow($this->select()->where('ID = ?', $id));
 		
 		// Es wurde ein Eintrag gefunden
 		if($row) {
@@ -165,6 +189,42 @@ class User extends Zend_Db_Table_Abstract {
         $row->Mail = $mail;
         
         $row->save();
+	}
+	
+	/**
+	 * Holt die aktuelle Streamingrate eines User per ID
+	 * 
+	 * @param int $id UserID
+	 */
+	public function getStreamingRateByID($id) {
+		
+		// Zeile suchen, in der die ID gefunden wird
+		$row = $this->fetchRow($this->select()->where('id = ?', $id));
+		
+		// Es wurde ein Eintrag gefunden
+		if($row) {
+			return $row->Streamingrate;
+		}
+		
+		return NULL;
+	}
+	
+	/**
+	 * Speichert die neue Streamingrate eines User per ID
+	 * 
+	 * @param int $id UserID
+	 * @param int $rate Streamingrate: 64, 128 or 192
+	 */
+	public function setStreamingRateByID($id, $rate) {
+		
+		// Zeile suchen, in der die ID gefunden wird
+		$row = $this->fetchRow($this->select()->where('id = ?', $id));
+		
+		// Es wurde ein Eintrag gefunden
+		
+		$row->Streamingrate = $rate;
+		
+		$row->save();
 	}
 	
 	/**

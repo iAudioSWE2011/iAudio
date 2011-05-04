@@ -39,13 +39,35 @@ class Session extends Zend_Db_Table_Abstract {
 	 * save session
 	 * 
 	 * @param string $session sessionID
+	 * @param int $id User ID
 	 */
-	public function saveSession($session) {
+	public function saveSession($session,$id) {
 		
 		$row = $this->createRow();
 	   	$row->sessionid = $session;
+	   	$row->UID = $id;
         
         $row->save();
+	}
+	
+	/**
+	 * get the user connected to a session
+	 *
+	 * @param string $session sessionID
+	 * @return int: UserID
+	 * 			NULL: Session does not exist
+	 */
+	public function getUserID($session)
+	{
+		// Zeile suchen, in der die ID gefunden wird
+		$row = $this->fetchRow($this->select()->where('sessionid = ?', $session));
+		
+		// Es wurde ein Eintrag gefunden
+		if($row) {
+			return $row->UID;
+		}
+		
+		return NULL;
 	}
 	
 	/**

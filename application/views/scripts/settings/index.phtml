@@ -26,38 +26,43 @@ $_SESSION['navi'] = "";
      
       <div id="main" class="normal">
       
-          <p class="big"><u>Register</u></p>
+          <p class="big"><u>Settings</u></p>
           
-          <p style="color: red; font-style: italic; font-weight: bold;">
+          
           <?php
-          
-          if(!empty($_REQUEST["Error"]) && $_REQUEST["Error"] == "true")
-              echo 'Bitte Eingaben überprüfen!';
-          else if(!empty($_REQUEST["Error"]) && $_REQUEST["Error"] == "pw")
-              echo 'Passwörter stimmen nicht überein!';
-          else if(!empty($_REQUEST["Error"]) && $_REQUEST["Error"] == "exists")
-              echo 'E-Mailadresse bereits registriert!';
+          if(!empty($_REQUEST["saved"]) && $_REQUEST["saved"] == "true")
+          {
+          	  echo '<p style="color: green; font-style: italic; font-weight: bold;">
+          	  		Passwort erfolgreich geändert
+          	  		</p>';
+          }	
           else
-              echo '&nbsp;';
+          {
+          	  echo '<p style="color: red; font-style: italic; font-weight: bold;">';
+	          
+          	  if(!empty($_REQUEST["pwchange"]) && $_REQUEST["pwchange"] == "false")
+	              echo 'Die neuen Passwörter stimmen nicht überein!';
+	          else if(!empty($_REQUEST["oldpw"]) && $_REQUEST["oldpw"] == "false")
+	              echo 'Das alte Passwort ist falsch!';
+	          else
+	              echo '&nbsp;';
+	              
+	          echo '</p>';
+          }
           ?>
-          </p>
           
-          <form action="/Register/save" enctype="multipart/form-data" method="post" name="options" AUTOCOMPLETE = "off">
+          <form action="/Settings/password" enctype="multipart/form-data" method="post" name="options" AUTOCOMPLETE = "off">
               		<table columns="3">
                       <tr>
-                        <td colspan="2">Name: </td>
-                        <td><input type="text" name="name" value="<?php echo urldecode($_REQUEST["name"]); ?>"></td>
+                        <td colspan="2">Altes Passwort: </td>
+                        <td><input type="password" name="pw_old"></td>
                       </tr>
                       <tr>
-                        <td colspan="2">E-Mail: </td>
-                        <td><input type="text" name="mail" value="<?php echo urldecode($_REQUEST["mail"]); ?>"></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">Passwort: </td>
+                        <td colspan="2">Neues Passwort: </td>
                         <td><input type="password" name="pw"></td>
                       </tr>
                       <tr>
-                        <td colspan="2">Passwort wiederholen: </td>
+                        <td colspan="2">Neues Passwort wiederholen: </td>
                         <td><input type="password" name="pw_check"></td>
                       </tr>
                       <tr>
@@ -66,7 +71,7 @@ $_SESSION['navi'] = "";
                         <td>&nbsp;</td>
                       </tr>
                       <tr>
-                        <td><input name="register" type="submit" value="Registrieren"></td>
+                        <td><input name="register" type="submit" value="Passwort ändern"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                       </tr>

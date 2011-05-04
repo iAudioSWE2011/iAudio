@@ -25,9 +25,9 @@ class LoginController extends Zend_Controller_Action
     	$mail = $this->_getParam('mail');
     	$pw = $this->_getParam('pw');
     	
-    	if($user->getCheckPassword($mail,$pw))
+    	if($user->checkPasswordByMail($mail,$pw))
     	{
-    		$session->saveSession(session_id());
+    		$session->saveSession(session_id(),$user->getIDByMail($mail));
     		$this->_redirect('/');
     	}
     	else
