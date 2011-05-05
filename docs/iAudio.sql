@@ -121,7 +121,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`ID`, `Name`, `Mail`, `PW`, `Streamingrate`) VALUES
-(1, 'Test', 'test@iAudio.com', '098f6bcd4621d373cade4e832627b4f6', '128');
+(1, 'Tester1', 'test@iAudio.com', '098f6bcd4621d373cade4e832627b4f6', '128'),
+(2, 'Tester2', 'tester2@iAudio.com', '098f6bcd4621d373cade4e832627b4f6', '128');
 
 -- --------------------------------------------------------
 
