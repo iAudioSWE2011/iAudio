@@ -1,7 +1,7 @@
 <?php
 
-require 'User.php';
-require 'Session.php';
+require_once 'User.php';
+require_once 'Session.php';
 
 class LogoutController extends Zend_Controller_Action
 {

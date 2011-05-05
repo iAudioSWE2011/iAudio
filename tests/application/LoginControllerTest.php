@@ -23,7 +23,7 @@ class LoginControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 		$this->assertController('Login');
 	}
 	
-public function testSuccessfulLogin()
+	public function testSuccessfulLogin()
 	{
 		$savedSession = new Session();
 		

@@ -1,6 +1,6 @@
 <?php
 
-require 'Session.php';
+require_once 'Session.php';
 
 class ImpressumController extends Zend_Controller_Action
 {

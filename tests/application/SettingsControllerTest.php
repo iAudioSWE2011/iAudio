@@ -2,8 +2,6 @@
 require_once '../TestHelper.php';
 require_once 'Zend/Application.php';
 require_once 'Zend/Test/PHPUnit/ControllerTestCase.php';
-require_once 'application/models/User.php';
-require_once 'application/models/Session.php';
 
 class SettingsControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {

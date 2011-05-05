@@ -1,6 +1,6 @@
 <?php
 
-require 'Session.php';
+require_once 'Session.php';
 
 class IndexController extends Zend_Controller_Action
 {
