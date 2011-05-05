@@ -271,5 +271,18 @@ class User extends Zend_Db_Table_Abstract {
 	     return (count($row)>0);    
 	}
 	
+	/**
+	 * delete user
+	 * 
+	 * @param string $mail Mail des Users
+	 */
+	public function deleteUser($mail) {
+		
+		$this->delete(
+        	$this->getAdapter()->quoteInto('Mail = ?', $mail)
+        );
+
+	}
+	
 }
 
