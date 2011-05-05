@@ -274,7 +274,7 @@ class User extends Zend_Db_Table_Abstract {
 	 */
 	public function createNewUser($name, $mail, $pw) {
 		
-        $row = $this->fetchAll(null, "ID")->toArray();;
+        $row = $this->fetchAll(null, "ID")->toArray();
 	      
         $amount = count($row);
         $amount++;
