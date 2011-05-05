@@ -27,8 +27,8 @@ public function testSuccessfulLogin()
 	{
 		$savedSession = new Session();
 		
-		$mail = "posselt@hm.edu";
-		$pw = "test123";
+		$mail = "test@iAudio.com";
+		$pw = "test";
 		$session = session_id();
 		
 		$this->dispatch('/Login/save/mail/'.$mail.'/pw/'.$pw);
@@ -41,12 +41,28 @@ public function testSuccessfulLogin()
 		
 	}
 	
-	public function testUnsuccessfulLogin()
+	public function testUnsuccessfulLoginPW()
 	{
 		$savedSession = new Session();
 		
-		$mail = "posselt@hm.edu";
-		$pw = "123test";
+		$mail = "test@iAudio.com";
+		$pw = "testtest";
+		$session = session_id();
+		
+		$this->dispatch('/Login/save/mail/'.$mail.'/pw/'.$pw);
+		$this->assertController('Login');
+		$this->assertAction('save');
+
+		$this->assertFalse($savedSession->exists($session));
+		
+	}
+	
+	public function testUnsuccessfulLoginMail()
+	{
+		$savedSession = new Session();
+		
+		$mail = "testtest@iAudio.com";
+		$pw = "test";
 		$session = session_id();
 		
 		$this->dispatch('/Login/save/mail/'.$mail.'/pw/'.$pw);
