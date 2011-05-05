@@ -20,6 +20,5 @@ class LogoutController extends Zend_Controller_Action
     	$this->_redirect('/');
     }
 
-
 }
 

@@ -32,7 +32,6 @@ class LoginController extends Zend_Controller_Action
     	}
     	else
     		$this->_redirect('/Login?Error=true');
-    	
         
     }
 

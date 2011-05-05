@@ -25,7 +25,6 @@ class SettingsController extends Zend_Controller_Action
     	$this->view->currentRate = $user->getStreamingRateByID($uid);
     	$this->view->currentMail = $user->getMailByID($uid);
 		$this->view->sessionset = $exists;
- 
     }
 
     public function streamAction()
@@ -38,8 +37,7 @@ class SettingsController extends Zend_Controller_Action
 
         $user->setStreamingRateByID($uid, $streamrate);
         
-        $this->_redirect('/Settings?savedStream=true');
-        
+        $this->_redirect('/Settings?savedStream=true');      
     }
     
 	public function mailAction()
@@ -63,8 +61,7 @@ class SettingsController extends Zend_Controller_Action
      	else
         	$user->setMailByID($uid, $newMail);
         
-        $this->_redirect('/Settings?savedMail=true');
-        
+        $this->_redirect('/Settings?savedMail=true');       
     }
     
 	public function passwordAction()

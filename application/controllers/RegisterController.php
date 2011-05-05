@@ -41,16 +41,14 @@ class RegisterController extends Zend_Controller_Action
     		$this->_redirect('/Register?Error=exists&name='.urlencode($name));
     	}
     	else
-    	{
-   			
+    	{  			
     		//Insert new User into Database
 	    	$id = $user->createNewUser($name, $mail, $pw);
 	
 	    	//Auto-Login of new Users
 	    	$session->saveSession(session_id(),$id);
 	    	$this->_redirect('/');
-    	}
-        
+    	}    
     }
 
 
