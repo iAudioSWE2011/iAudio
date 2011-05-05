@@ -210,6 +210,24 @@ class User extends Zend_Db_Table_Abstract {
 	}
 	
 	/**
+	 * Holt die aktuelle Streamingrate eines User per Mail
+	 * 
+	 * @param String $mail UserMail
+	 */
+	public function getStreamingRateByMail($mail) {
+		
+		// Zeile suchen, in der die ID gefunden wird
+		$row = $this->fetchRow($this->select()->where('mail = ?', $mail));
+		
+		// Es wurde ein Eintrag gefunden
+		if($row) {
+			return $row->Streamingrate;
+		}
+		
+		return NULL;
+	}
+	
+	/**
 	 * Speichert die neue Streamingrate eines User per ID
 	 * 
 	 * @param int $id UserID
@@ -219,6 +237,24 @@ class User extends Zend_Db_Table_Abstract {
 		
 		// Zeile suchen, in der die ID gefunden wird
 		$row = $this->fetchRow($this->select()->where('id = ?', $id));
+		
+		// Es wurde ein Eintrag gefunden
+		
+		$row->Streamingrate = $rate;
+		
+		$row->save();
+	}
+	
+	/**
+	 * Speichert die neue Streamingrate eines User per mail
+	 * 
+	 * @param String $mail UserMail
+	 * @param int $rate Streamingrate: 64, 128 or 192
+	 */
+	public function setStreamingRateByMail($mail, $rate) {
+		
+		// Zeile suchen, in der die ID gefunden wird
+		$row = $this->fetchRow($this->select()->where('mail = ?', $mail));
 		
 		// Es wurde ein Eintrag gefunden
 		
