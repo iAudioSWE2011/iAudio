@@ -16,11 +16,11 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Datenbank: `iaudiotestdb`
+-- Datenbank: `iaudio`
 --
-DROP DATABASE IF EXISTS `iaudiotestdb`;
-CREATE DATABASE `iaudiotestdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `iaudiotestdb`;
+DROP DATABASE IF EXISTS `iaudio`;
+CREATE DATABASE `iaudio` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `iaudio`;
 
 -- --------------------------------------------------------
 
