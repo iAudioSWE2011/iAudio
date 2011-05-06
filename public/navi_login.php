@@ -5,7 +5,7 @@ echo '
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/Player">Player</a></li>
-        <li><a href="/?navi=Verwaltung">Verwaltung</a></li>';
+        <li><a href="/Index?navi=Verwaltung">Verwaltung</a></li>';
 
 if($_SESSION["navi"] == "Verwaltung")
 	echo '
