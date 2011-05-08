@@ -16,7 +16,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Datenbank: `iaudio`
+-- Datenbank: `iaudiotestdb`
 --
 DROP DATABASE IF EXISTS `iaudiotestdb`;
 CREATE DATABASE `iaudiotestdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
@@ -54,7 +54,9 @@ DROP TABLE IF EXISTS `playlist`;
 CREATE TABLE IF NOT EXISTS `playlist` (
   `ID` int(11) NOT NULL,
   `Name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`ID`)
+  `UID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`,`UID`),
+  KEY `UID` (`UID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -99,6 +101,8 @@ CREATE TABLE IF NOT EXISTS `session` (
 -- Daten für Tabelle `session`
 --
 
+INSERT INTO `session` (`sessionid`, `UID`) VALUES
+('g9chbdqha75hnkm2h9fnvou225', 1);
 
 -- --------------------------------------------------------
 
@@ -121,26 +125,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`ID`, `Name`, `Mail`, `PW`, `Streamingrate`) VALUES
-(1, 'Tester1', 'test@iAudio.com', '098f6bcd4621d373cade4e832627b4f6', '128'),
-(2, 'Tester2', 'tester2@iAudio.com', '098f6bcd4621d373cade4e832627b4f6', '128');
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `userplaylist`
---
-
-DROP TABLE IF EXISTS `userplaylist`;
-CREATE TABLE IF NOT EXISTS `userplaylist` (
-  `UID` int(11) NOT NULL,
-  `PID` int(11) NOT NULL,
-  PRIMARY KEY (`UID`,`PID`),
-  KEY `PID` (`PID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Daten für Tabelle `userplaylist`
---
+(1, 'Christian Posselt', 'posselt@hm.edu', '07104e60ccaa86c5cd45f014802327f4', '128'),
+(2, 'Tester1', 'test@iAudio.com', '098f6bcd4621d373cade4e832627b4f6', '128'),
+(3, 'Tester2', 'tester2@iAudio.com', '098f6bcd4621d373cade4e832627b4f6', '128');
 
 
 --
@@ -154,6 +141,12 @@ ALTER TABLE `music`
   ADD CONSTRAINT `music_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`ID`);
 
 --
+-- Constraints der Tabelle `playlist`
+--
+ALTER TABLE `playlist`
+  ADD CONSTRAINT `playlist_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`ID`);
+
+--
 -- Constraints der Tabelle `playlistmusic`
 --
 ALTER TABLE `playlistmusic`
@@ -165,10 +158,3 @@ ALTER TABLE `playlistmusic`
 --
 ALTER TABLE `session`
   ADD CONSTRAINT `session_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`ID`);
-
---
--- Constraints der Tabelle `userplaylist`
---
-ALTER TABLE `userplaylist`
-  ADD CONSTRAINT `userplaylist_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`ID`),
-  ADD CONSTRAINT `userplaylist_ibfk_2` FOREIGN KEY (`PID`) REFERENCES `playlist` (`ID`);

@@ -26,17 +26,21 @@ class Playlist extends Zend_Db_Table_Abstract {
 	 */
 	public function createPlaylist($name,$uid) {
 		
+		$row = $this->fetchAll(null, "ID")->toArray();
+	      
+        $amount = count($row);
+        $amount++;
+		
 		//Create Playlist
 		$row = $this->createRow();
-	   	$row->Name = $name;
+	   	
+		$row->ID = $amount;
+		$row->Name = $name;
+	   	$row->UID = $uid;
         
         $pid = $row->save();
-        
-        //Link Playlist to User
-        $link = new userplaylist();
-        $link->linkPlaylistToUser($pid,$uid);
-        
-        return $pid;
+ 
+        return $amount;
 	}
 	
 	/**
@@ -47,21 +51,10 @@ class Playlist extends Zend_Db_Table_Abstract {
 	 * @return int ID of playlist
 	 */
 	public function deletePlaylist($name,$uid) {
-
-		$playlist = $this->select()
-				    ->from(array('p' => 'playlist'),
-             			   array('PID' => 'ID', 'Name'))
-             	    ->join(array('pm' => 'userplaylist'), 'pm.pid = p.pid')
-             	    ->where('Name = ?', $name)
-             	    ->where('UID = ?', $uid); 
-		
-        //Unlink Playlist from User
-        $link = new userplaylist();
-        $link->unlinkPlaylistFromUser($playlist->PID);
-        
+       
         //delete Playlist
         $this->delete(
-        	$this->getAdapter()->quoteInto('ID = ?', $playlist->PID)
+        	$this->getAdapter()->quoteInto('UID = ?', $uid)->quoteInto('name = ?', $name)
         );
 	}
 	
@@ -75,12 +68,7 @@ class Playlist extends Zend_Db_Table_Abstract {
 	 */
 	public function existsForUser($name,$uid) {
 
-		$playlist = $this->select()
-				    ->from(array('p' => 'playlist'),
-             			   array('PID' => 'ID', 'Name'))
-             	    ->join(array('pm' => 'userplaylist'), 'pm.pid = p.pid')
-             	    ->where('Name = ?', $name)
-             	    ->where('UID = ?', $uid); 
+		$playlist = $this->select()->where('Name = ?', $name)->where('UID = ?', $uid); 
 		
         return count($playlist)>0;
 	}
@@ -94,12 +82,7 @@ class Playlist extends Zend_Db_Table_Abstract {
 	 */
 	public function getPlaylistID($name,$uid) {
 
-		$playlist = $this->select()
-				    ->from(array('p' => 'playlist'),
-             			   array('PID' => 'ID', 'Name'))
-             	    ->join(array('pm' => 'userplaylist'), 'pm.pid = p.pid')
-             	    ->where('Name = ?', $name)
-             	    ->where('UID = ?', $uid); 
+		$playlist = $this->select()->where('Name = ?', $name)->where('UID = ?', $uid); 
 		
         if($playlist)
         {
