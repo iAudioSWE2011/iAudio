@@ -68,7 +68,7 @@ class Playlist extends Zend_Db_Table_Abstract {
 	 */
 	public function existsForUser($name,$uid) {
 
-		$playlist = $this->select()->where('Name = ?', $name)->where('UID = ?', $uid); 
+		$playlist = $this->fetchAll($this->select()->where('Name = ?', $name)->where('UID = ?', $uid)); 
 		
         return count($playlist)>0;
 	}
@@ -82,7 +82,7 @@ class Playlist extends Zend_Db_Table_Abstract {
 	 */
 	public function getPlaylistID($name,$uid) {
 
-		$playlist = $this->select()->where('Name = ?', $name)->where('UID = ?', $uid); 
+		$playlist = $this->fetchRow($this->select()->where('Name = ?', $name)->where('UID = ?', $uid)); 
 		
         if($playlist)
         {
@@ -90,6 +90,17 @@ class Playlist extends Zend_Db_Table_Abstract {
         }
         
         return NULL;
+	}
+	
+	/**
+	 * Returns all Playlists of a User
+	 * 
+	 * @param int $uid User ID
+	 * @return array: All Playlist of a User
+	 */
+	public function getPlaylists($uid) 
+	{
+        return $this->fetchAll($this->select()->where('UID = ?', $uid));
 	}
 	
 }

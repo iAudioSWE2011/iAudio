@@ -2,6 +2,7 @@
 
 require_once 'User.php';
 require_once 'Session.php';
+require_once 'Playlist.php';
 require_once 'scripts/functions.php';
 
 class PlaylistController extends Zend_Controller_Action
@@ -15,12 +16,13 @@ class PlaylistController extends Zend_Controller_Action
     
     public function indexAction()
     {   	
-
+		$playlist = new Playlist();
     	$session = new Session();
     	$sessionid = session_id();
         
     	$exists = $session->exists($sessionid);
 		$this->view->sessionset = $exists;
+		$this->view->playlists = $playlist->getPlaylists($session->getUserID($sessionid));
     }
 
     public function createAction()
@@ -28,17 +30,18 @@ class PlaylistController extends Zend_Controller_Action
         $user = new User();
         $playlist = new Playlist();
     	$session = new Session();
-        
+        $sessionid = session_id();
+               
     	$name = $this->_getParam('name');
     	
     	if($name == "")
     		$this->_redirect('/Playlist?savedPlaylist=empty');
-    	else if($playlist->existsForUser($name))
+    	else if($playlist->existsForUser($name, $session->getUserID(session_id())))
     		$this->_redirect('/Playlist?savedPlaylist=exists');
     	else 
-    		$playlist->createPlaylist($name, 1);
+    		$playlist->createPlaylist($name, $session->getUserID($sessionid));
         
-        $this->_redirect('/Settings?savedPlaylist=true');      
+        $this->_redirect('/Playlist?savedPlaylist=true');      
     }
 
 

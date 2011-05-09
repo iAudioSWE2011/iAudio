@@ -10,8 +10,8 @@ echo '
 if($_SESSION["navi"] == "Verwaltung")
 	echo '
       <ul id="naviklein">
-        <li><a href="/Adminmusic">Musik</a></li>
-        <li><a href="/Adminplaylist">Playlisten</a></li>
+        <li><a href="/Music">Musik</a></li>
+        <li><a href="/Playlist">Playlisten</a></li>
       </ul>';
 
 
