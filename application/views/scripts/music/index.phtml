@@ -1,0 +1,144 @@
+<?php
+$_SESSION['navi'] = "Verwaltung";
+?>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>iAudio</title>
+    <link rel="stylesheet" type="text/css" href="scripts/main.css">
+  </head>
+
+  <body>
+    
+    <div id="container">
+      
+      <?php
+        if($this->sessionset)
+      		include('navi_login.php');
+      	else
+      		include('navi_default.php');
+      ?>
+     
+      <div id="main" class="normal">
+      
+          <p class="big"><u>Musikverwaltung</u></p>
+          
+          <?php
+          if(!empty($_REQUEST["upload"]) && $_REQUEST["upload"] == "true")
+          {
+          	  echo '<p style="color: green; font-style: italic; font-weight: bold;">
+          	  		Musik erfolgreich hochgeladen
+          	  		</p>';
+          }	
+          else
+          {
+          	  echo '<p style="color: red; font-style: italic; font-weight: bold;">';
+	          
+          	  if(!empty($_REQUEST["upload"]) && $_REQUEST["upload"] == "empty")
+	              echo 'Keine Dateien zum Upload angegeben!';
+	          else if(!empty($_REQUEST["extension"]) && $_REQUEST["extension"] == "true")
+	              echo 'Einige oder sämtliche Dateien hatte nicht die Endung .mp3!';
+	          else
+	              echo '&nbsp;';
+	              
+	          echo '</p>';
+          }
+          ?>
+          
+         		 <form action="/Music/upload" enctype="multipart/form-data" method="post" name="options" AUTOCOMPLETE = "off">
+              		<table columns="3">
+                      <tr>
+                        <td colspan="3"><b>Musik hochladen</b></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">Auswahl: </td>
+                        <td><input name="files[]" type="file"></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">&nbsp;</td>
+                        <td><input name="files[]" type="file"></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">&nbsp;</td>
+                        <td><input name="files[]" type="file"></td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><input type="hidden" name="MAX_FILE_SIZE" value="10000000" /></td>
+                      </tr>
+                      <tr>
+                        <td><input name="create" type="submit" value="hochladen"></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                    </table>
+              	</form>
+              	
+             <br><br>
+             
+             <?php
+          if(!empty($_REQUEST["delete"]) && $_REQUEST["delete"] == "true")
+          {
+          	  echo '<p style="color: green; font-style: italic; font-weight: bold;">
+          	  		Song erfolgreich gelöscht
+          	  		</p>';
+          }	
+          else
+          {
+          	  echo '<p style="color: red; font-style: italic; font-weight: bold;">';
+	          
+          	  if(!empty($_REQUEST["delete"]) && $_REQUEST["delete"] == "empty")
+	              echo 'Sie haben keine Songs!';
+          	  else
+	              echo '&nbsp;';
+	              
+	          echo '</p>';
+          }
+          ?>
+          
+         		 <form action="/Music/delete" enctype="multipart/form-data" method="post" name="options" AUTOCOMPLETE = "off">
+              		<table columns="3">
+                      <tr>
+                        <td colspan="3"><b>Musik löschen</b></td>
+                      </tr>
+                      <tr>
+                      	 <td colspan="2">Song: </td>
+                      	 <td>
+                      	 	<select name="id" size="1">
+                               <?php 
+                                
+                                foreach($this->music as $music) 
+                                {
+                                  echo '<option value="'.$music["ID"].'">'.$music["Name"].'</option>';
+                                }
+                              
+                              ?>
+                          	</select>
+                        </td>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td><input name="delete" type="submit" value="löschen"></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                    </table>
+              	</form>
+              	
+             <br><br>
+
+      
+      </div>
+    
+    </div>
+    
+  </body>
+  
+</html>

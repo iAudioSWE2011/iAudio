@@ -44,6 +44,10 @@ class Playlist extends Zend_Db_Table_Abstract {
 	 */
 	public function deletePlaylist($id) {
        
+		$playlistmusic = new PlaylistMusic();
+		
+		$playlistmusic->deleteMusicPID($id);
+		
         //delete Playlist
         $this->delete(
         	$this->getAdapter()->quoteInto('ID = ?', $id)
