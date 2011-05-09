@@ -44,6 +44,20 @@ class PlaylistControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 	}
 	
 	
+	public function testCreateNewPlaylistNoName()
+	{
+		$playlist = new Playlist();
+		$session = new Session();
+		$name = '';
+		
+		$this->dispatch('Playlist/create/name/'.$name);
+		
+		//does the playlist exists?
+		$this->assertFalse($playlist->existsForUser($name, $session->getUserID(session_id())));
+		
+	}
+	
+	
 	public function testNoDoublePlaylists()
 	{
 		$playlist = new Playlist();
@@ -101,6 +115,27 @@ class PlaylistControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 		$this->assertTrue($playlist->existsForUser($newName, $session->getUserID(session_id())));
 		
 		$this->dispatch('Playlist/delete/name/'.$newName);
+	
+	}
+	
+	public function testRenamePlaylistsNoNewName()
+	{
+		$playlist = new Playlist();
+		$session = new Session();
+		$name = 'TestPlaylist';
+		$newName = '';
+		
+		$this->dispatch('Playlist/create/name/'.$name);
+		
+		//does the playlist exists?
+		$this->assertTrue($playlist->existsForUser($name, $session->getUserID(session_id())));
+		
+		$this->dispatch('Playlist/rename/name/'.$name.'/newname/'.$newName);
+		
+		$this->assertTrue($playlist->existsForUser($name, $session->getUserID(session_id())));
+		$this->assertFalse($playlist->existsForUser($newName, $session->getUserID(session_id())));
+		
+		$this->dispatch('Playlist/delete/name/'.$name);
 	
 	}
 	
