@@ -43,6 +43,45 @@ class PlaylistController extends Zend_Controller_Action
         
         $this->_redirect('/Playlist?savedPlaylist=true');      
     }
+    
+	public function renameAction()
+    {
+        $user = new User();
+        $playlist = new Playlist();
+    	$session = new Session();
+        $sessionid = session_id();
+               
+    	$id = $this->_getParam('id');
+    	$newname = $this->_getParam('newname');
+    	
+    	if($newname == "")
+    		$this->_redirect('/Playlist?renamePlaylist=empty');
+    	else if($id == "")
+    		$this->_redirect('/Playlist?renamePlaylist=noList');
+    	else if($playlist->existsForUser($newname, $session->getUserID(session_id())))
+    		$this->_redirect('/Playlist?renamePlaylist=exists');
+    	else 
+    		$playlist->renamePlaylist($id, $newname);
+        
+        $this->_redirect('/Playlist?renamePlaylist=true');      
+    }
+    
+	public function deleteAction()
+    {
+        $user = new User();
+        $playlist = new Playlist();
+    	$session = new Session();
+        $sessionid = session_id();
+               
+    	$id = $this->_getParam('id');
+    	
+    	if($id == "")
+    		$this->_redirect('/Playlist?deletePlaylist=empty');
+    	else 
+    		$playlist->deletePlaylist($id);
+        
+        $this->_redirect('/Playlist?deletePlaylist=true');      
+    }
 
 
 }

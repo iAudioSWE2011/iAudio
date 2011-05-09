@@ -46,15 +46,13 @@ class Playlist extends Zend_Db_Table_Abstract {
 	/**
 	 * Delete a playlist
 	 * 
-	 * @param String $name Name of Playlist
-	 * @param int $uid User ID
-	 * @return int ID of playlist
+	 * @param int $id Playlist ID
 	 */
-	public function deletePlaylist($name,$uid) {
+	public function deletePlaylist($id) {
        
         //delete Playlist
         $this->delete(
-        	$this->getAdapter()->quoteInto('UID = ?', $uid)->quoteInto('name = ?', $name)
+        	$this->getAdapter()->quoteInto('ID = ?', $id)
         );
 	}
 	
@@ -100,7 +98,22 @@ class Playlist extends Zend_Db_Table_Abstract {
 	 */
 	public function getPlaylists($uid) 
 	{
-        return $this->fetchAll($this->select()->where('UID = ?', $uid));
+        return $this->fetchAll($this->select()->where('UID = ?', $uid)->order('Name ASC'));
+	}
+	
+	/**
+	 * Renams a specific Playlist
+	 * 
+	 * @param String $name Name of Playlist
+	 * @param int $id ID of Playlist
+	 */
+	public function renamePlaylist($id,$name) {
+
+		$playlist = $this->fetchRow($this->select()->where('ID = ?', $id)); 
+		
+        $playlist->Name = $name;
+        
+        $playlist->save();
 	}
 	
 }
