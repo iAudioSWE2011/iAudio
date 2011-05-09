@@ -37,10 +37,11 @@ class PlaylistControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 		$name = 'TestPlaylist';
 		
 		$this->dispatch('Playlist/create/name/'.$name);
+		$id = $playlist->getPlaylistID($name, $session->getUserID(session_id()));
 		
 		//does the playlist exists?
 		$this->assertTrue($playlist->existsForUser($name, $session->getUserID(session_id())));
-		$this->dispatch('Playlist/delete/name/'.$name);
+		$this->dispatch('Playlist/delete/id/'.$id);
 	}
 	
 	
@@ -65,6 +66,7 @@ class PlaylistControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 		$name = 'TestPlaylist';
 		
 		$this->dispatch('Playlist/create/name/'.$name);
+		$id = $playlist->getPlaylistID($name, $session->getUserID(session_id()));
 		
 		//does the playlist exists?
 		$this->assertTrue($playlist->existsForUser($name, $session->getUserID(session_id())));
@@ -77,7 +79,7 @@ class PlaylistControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 		
 		$this->assertTrue($amount == $amountNew);
 		
-		$this->dispatch('Playlist/delete/name/'.$name);
+		$this->dispatch('Playlist/delete/id/'.$id);
 	}
 	
 	public function testDeletePlaylists()
@@ -88,10 +90,12 @@ class PlaylistControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 		
 		$this->dispatch('Playlist/create/name/'.$name);
 		
+		$id = $playlist->getPlaylistID($name, $session->getUserID(session_id()));
+		
 		//does the playlist exists?
 		$this->assertTrue($playlist->existsForUser($name, $session->getUserID(session_id())));
 		
-		$this->dispatch('Playlist/delete/name/'.$name);
+		$this->dispatch('Playlist/delete/id/'.$id);
 		
 		$this->assertFalse($playlist->existsForUser($name, $session->getUserID(session_id())));
 	
@@ -105,16 +109,17 @@ class PlaylistControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 		$newName = 'NewTestPlaylistName';
 		
 		$this->dispatch('Playlist/create/name/'.$name);
+		$id = $playlist->getPlaylistID($name, $session->getUserID(session_id()));
 		
 		//does the playlist exists?
 		$this->assertTrue($playlist->existsForUser($name, $session->getUserID(session_id())));
 		
-		$this->dispatch('Playlist/rename/name/'.$name.'/newname/'.$newName);
+		$this->dispatch('Playlist/rename/id/'.$id.'/newname/'.$newName);
 		
 		$this->assertFalse($playlist->existsForUser($name, $session->getUserID(session_id())));
 		$this->assertTrue($playlist->existsForUser($newName, $session->getUserID(session_id())));
 		
-		$this->dispatch('Playlist/delete/name/'.$newName);
+		$this->dispatch('Playlist/delete/id/'.$id);
 	
 	}
 	
@@ -126,16 +131,17 @@ class PlaylistControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 		$newName = '';
 		
 		$this->dispatch('Playlist/create/name/'.$name);
+		$id = $playlist->getPlaylistID($name, $session->getUserID(session_id()));
 		
 		//does the playlist exists?
 		$this->assertTrue($playlist->existsForUser($name, $session->getUserID(session_id())));
-		
-		$this->dispatch('Playlist/rename/name/'.$name.'/newname/'.$newName);
+	
+		$this->dispatch('Playlist/rename/id/'.$id.'/newname/'.$newName);
 		
 		$this->assertTrue($playlist->existsForUser($name, $session->getUserID(session_id())));
 		$this->assertFalse($playlist->existsForUser($newName, $session->getUserID(session_id())));
 		
-		$this->dispatch('Playlist/delete/name/'.$name);
+		$this->dispatch('Playlist/delete/id/'.$id);
 	
 	}
 	
@@ -148,6 +154,8 @@ class PlaylistControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 		
 		$this->dispatch('Playlist/create/name/'.$name);
 		$this->dispatch('Playlist/create/name/'.$newName);
+		$id1 = $playlist->getPlaylistID($name, $session->getUserID(session_id()));
+		$id2 = $playlist->getPlaylistID($newName, $session->getUserID(session_id()));
 		
 		//does the playlist exists?
 		$this->assertTrue($playlist->existsForUser($name, $session->getUserID(session_id())));
@@ -158,8 +166,8 @@ class PlaylistControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 		$this->assertTrue($playlist->existsForUser($name, $session->getUserID(session_id())));
 		$this->assertTrue($playlist->existsForUser($newName, $session->getUserID(session_id())));
 		
-		$this->dispatch('Playlist/delete/name/'.$name);
-		$this->dispatch('Playlist/delete/name/'.$newName);
+		$this->dispatch('Playlist/delete/id/'.$id1);
+		$this->dispatch('Playlist/delete/id/'.$id2);
 	
 	}
 	

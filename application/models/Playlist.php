@@ -25,22 +25,16 @@ class Playlist extends Zend_Db_Table_Abstract {
 	 * @return int ID of playlist
 	 */
 	public function createPlaylist($name,$uid) {
-		
-		$row = $this->fetchAll(null, "ID")->toArray();
-	      
-        $amount = count($row);
-        $amount++;
-		
+			
 		//Create Playlist
 		$row = $this->createRow();
 	   	
-		$row->ID = $amount;
 		$row->Name = $name;
 	   	$row->UID = $uid;
         
         $pid = $row->save();
  
-        return $amount;
+        return $pid;
 	}
 	
 	/**
@@ -84,7 +78,7 @@ class Playlist extends Zend_Db_Table_Abstract {
 		
         if($playlist)
         {
-        	return $playlist->PID;
+        	return $playlist->ID;
         }
         
         return NULL;

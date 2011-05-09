@@ -68,7 +68,6 @@ class PlaylistController extends Zend_Controller_Action
     
 	public function deleteAction()
     {
-        $user = new User();
         $playlist = new Playlist();
     	$session = new Session();
         $sessionid = session_id();
