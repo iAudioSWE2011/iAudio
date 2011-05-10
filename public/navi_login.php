@@ -4,7 +4,7 @@ echo '
     <div id="navi">
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/Player">Player</a></li>
+        <li><a href="/Play">Player</a></li>
         <li><a href="/Index?navi=Verwaltung">Verwaltung</a></li>';
 
 if($_SESSION["navi"] == "Verwaltung")
