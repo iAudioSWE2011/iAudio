@@ -97,6 +97,8 @@ class MusicController extends Zend_Controller_Action
 			         $filelocation
 			       );
 			       
+			       chmod ("/somedir/somefile", 0644);
+			       
 			       $punkt = strrpos($_FILES["files"]["name"][$key],".");
 				   $name = substr($_FILES["files"]["name"][$key],0,$punkt); 
 			       
