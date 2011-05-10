@@ -54,7 +54,7 @@ class PlaylistMusic extends Zend_Db_Table_Abstract {
 	 */
 	public function deleteMusicMID($mid) {
 		
-		if(count($this->fetchAll($this->select()->where('MID = ?', $mid))->toArray())>0);
+	
 			//delete Music
 	        $this->delete(
 	        	$this->getAdapter()->quoteInto('MID = ?', $mid)
@@ -67,8 +67,7 @@ class PlaylistMusic extends Zend_Db_Table_Abstract {
 	 * @param int $pid Playlist ID
 	 */
 	public function deleteMusicPID($pid) {
-		
-		if(count($this->fetchAll($this->select()->where('PID = ?', $pid))->toArray())>0);
+
 			//delete Music
 	        $this->delete(
 	        	$this->getAdapter()->quoteInto('PID = ?', $pid)

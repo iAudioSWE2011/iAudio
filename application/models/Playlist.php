@@ -9,6 +9,7 @@
  */
 
 require_once 'Zend/Db/Table/Abstract.php';
+require_once 'PlaylistMusic.php';
 
 class Playlist extends Zend_Db_Table_Abstract {
 	

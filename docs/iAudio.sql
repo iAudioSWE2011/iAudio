@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `music` (
 
 DROP TABLE IF EXISTS `playlist`;
 CREATE TABLE IF NOT EXISTS `playlist` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `UID` int(11) NOT NULL,
   PRIMARY KEY (`ID`,`UID`),
@@ -123,6 +123,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`ID`, `Name`, `Mail`, `PW`, `Streamingrate`) VALUES
 (1, 'Christian Posselt', 'posselt@hm.edu', '07104e60ccaa86c5cd45f014802327f4', '128'),
+(2, 'Christian Mitterreiter', 'mitterre@iAudio.com', 'faf942e4d5294f73410d74001fc06239', '128');
 
 --
 -- Constraints der exportierten Tabellen
