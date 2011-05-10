@@ -33,6 +33,7 @@ class MusicController extends Zend_Controller_Action
     {
 		$zul_endungen = array('mp3');
 		$wrong_extension = "false";
+		$wrong_filesize = "false";
     	
     	$music = new Music();
     	$session = new Session();
@@ -104,8 +105,13 @@ class MusicController extends Zend_Controller_Action
 				else
 					$wrong_extension = "true";
 		   }
+		   else if ($error == UPLOAD_ERR_INI_SIZE)
+		   	$wrong_filesize = "true";
 		}
     	
+		if($wrong_filesize == "true")
+			$this->_redirect('/Music?size=true');
+		
 		if($wrong_extension == "true")
 			$this->_redirect('/Music?extension=true');
 		

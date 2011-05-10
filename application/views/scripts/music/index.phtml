@@ -39,6 +39,8 @@ $_SESSION['navi'] = "Verwaltung";
 	          
           	  if(!empty($_REQUEST["upload"]) && $_REQUEST["upload"] == "empty")
 	              echo 'Keine Dateien zum Upload angegeben!';
+	          else if(!empty($_REQUEST["size"]) && $_REQUEST["size"] == "true")
+	              echo 'Einige oder sämtliche Dateien sind größer als 10MB!';
 	          else if(!empty($_REQUEST["extension"]) && $_REQUEST["extension"] == "true")
 	              echo 'Einige oder sämtliche Dateien hatte nicht die Endung .mp3!';
 	          else
