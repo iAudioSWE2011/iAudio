@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 05. Mai 2011 um 12:56
+-- Erstellungszeit: 10. Mai 2011 um 17:50
 -- Server Version: 5.1.50
 -- PHP-Version: 5.3.5
 
@@ -18,7 +18,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Datenbank: `iaudiotestdb`
 --
-DROP DATABASE IF EXISTS `iaudiotestdb`;
+DROP DATABASE IF EXISTS`iaudiotestdb`;
 CREATE DATABASE `iaudiotestdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `iaudiotestdb`;
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `music` (
   `Link192` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `UID` (`UID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=23 ;
 
 --
 -- Daten für Tabelle `music`
@@ -53,16 +53,17 @@ CREATE TABLE IF NOT EXISTS `music` (
 
 DROP TABLE IF EXISTS `playlist`;
 CREATE TABLE IF NOT EXISTS `playlist` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `UID` int(11) NOT NULL,
   PRIMARY KEY (`ID`,`UID`),
   KEY `UID` (`UID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Daten für Tabelle `playlist`
 --
+
 
 -- --------------------------------------------------------
 
@@ -101,6 +102,7 @@ CREATE TABLE IF NOT EXISTS `session` (
 -- Daten für Tabelle `session`
 --
 
+
 -- --------------------------------------------------------
 
 --
@@ -120,12 +122,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 -- Daten für Tabelle `user`
 --
-
 INSERT INTO `user` (`ID`, `Name`, `Mail`, `PW`, `Streamingrate`) VALUES
 (1, 'Christian Posselt', 'posselt@hm.edu', '07104e60ccaa86c5cd45f014802327f4', '128'),
 (2, 'Tester1', 'test@iAudio.com', '098f6bcd4621d373cade4e832627b4f6', '128'),
 (3, 'Tester2', 'tester2@iAudio.com', '098f6bcd4621d373cade4e832627b4f6', '128');
-
 --
 -- Constraints der exportierten Tabellen
 --
