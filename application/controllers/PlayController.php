@@ -71,26 +71,6 @@ class PlayController extends Zend_Controller_Action
 		$this->view->playlists = $playlist->getPlaylists($uid);
 		
     }
-    
-    public function chooseAction()
-    {
-    	$playlist = new Playlist();
-		$playlistmusic = new PlaylistMusic();
-		$music = new Music();
-    	$session = new Session();
-    	$sessionid = session_id();
-    	$uid = $session->getUserID($sessionid);
-    	
-    	$choose = $this->_getParam('selection');
-    	$playlist = $this->_getParam('playlist');
-    	
-    	$playlistmusic->deleteMusicPID($playlist);
-    	
-    	foreach($choose as $mid)
-			$playlistmusic->addMusic($mid, $playlist);
-			
-		 $this->_redirect('/Choose?saved=true'); 
-    }
-
+   
 }
 

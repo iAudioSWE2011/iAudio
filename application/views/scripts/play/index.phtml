@@ -69,13 +69,14 @@ $_SESSION['navi'] = "";
              	echo 
              	'
              	<!This code for IE>
-				<EMBED SRC="'.$this->m3u.'" HIDDEN="true" AUTOSTART="true" width="128" height="128">
+				<EMBED SRC="'.$this->m3u.'" HIDDEN="true" AUTOSTART="true" width="0" height="0">
+				
 				<!This code for Netscape>
 				<OBJECT ID="MediaPlayer"
 				classid="CLSID:22d6f312-b0f6-11d0-94ab-0080c74c7e95"
 				CODEBASE="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=6,4,5,715"
 				standby="Loading Microsoft Windows Media Player components..."
-				TYPE="application/x-oleobject" width="239" height="179">
+				TYPE="application/x-oleobject" width="0" height="0">
 				
 				<PARAM NAME="FileName" VALUE="'.$this->m3u.'">
 				<PARAM NAME="AnimationatStart" VALUE="false">
@@ -88,8 +89,8 @@ $_SESSION['navi'] = "";
 				SRC="'.$this->m3u.'"
 				Name=MediaPlayer
 				ShowControls=0
-				Width=2
-				Height=2
+				Width=0
+				Height=0>
 				</embed>
 				</OBJECT>
              	';
