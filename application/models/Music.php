@@ -102,6 +102,11 @@ class Music extends Zend_Db_Table_Abstract {
 		
 		$playlistmusic->deleteMusicMID($id);
 		
+		$link = $this->fetchRow($this->select()->where('ID = ?', $id));
+		unlink($link->Link64);
+		unlink($link->Link128);
+		unlink($link->Link192);
+		
 		//delete Music
         $this->delete(
         	$this->getAdapter()->quoteInto('ID = ?', $id)
