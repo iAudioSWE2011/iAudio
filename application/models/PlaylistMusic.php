@@ -9,6 +9,7 @@
  */
 
 require_once 'Zend/Db/Table/Abstract.php';
+require_once 'Music.php';
 
 class PlaylistMusic extends Zend_Db_Table_Abstract {
 	
@@ -45,6 +46,34 @@ class PlaylistMusic extends Zend_Db_Table_Abstract {
 		$music = $this->fetchAll($this->select()->where('PID = ?', $pid))->toArray();
         
         return $music;
+	}
+	
+	/**
+	 * getMusic
+	 * 
+	 * @param int $id File ID
+	 * @return string $link64 Link zu 64kbit/s file
+	 */
+	public function getMusicWithName($pid) {
+		
+		$select = $this->select(Zend_Db_Table::SELECT_WITH_FROM_PART);
+		$select->setIntegrityCheck(false)
+		       ->join('music', 'music.ID = playlistmusic.MID')
+		       ->where('playlistmusic.PID = ?', $pid);
+ 
+		$rows = $this->fetchAll($select);
+        
+        return $rows;
+	}
+	
+	/**
+	 * getMusic
+	 */
+	public function existsInPlaylist($pid,$mid) {
+		
+		$music = $this->fetchAll($this->select()->where('PID = ?', $pid)->where('MID = ?', $mid))->toArray();
+        
+        return count($music)>0;
 	}
 	
 	/**

@@ -1,0 +1,160 @@
+<?php
+$_SESSION['navi'] = "Verwaltung";
+?>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>iAudio</title>
+    <link rel="stylesheet" type="text/css" href="scripts/main.css">
+    <script type="text/javascript">
+
+	    function do_submit() 
+	    {
+	  	  for (i=document.getElementById('choosing').selection.length-1; i >= 0 ; i--) {
+	  	    document.getElementById('choosing').selection.options[i].selected=true;
+	  	    }
+	  	  document.getElementById('choosing').submit();
+	  	}
+	  	
+		function moveItems(source, destination) 
+		{
+		    for (i=0; i < source.length; i++) {
+		        if (source.options[i].selected==true) {
+		            destination.options[destination.length] = new Option(source.options[i].text, source.options[i].value);
+		        }
+		    }
+		    for (i=source.length-1; i >= 0 ; i--) {
+		        if (source.options[i].selected==true) {
+		            source.options[i] = null;
+		        }
+		    }
+		}
+		
+	</script>
+  </head>
+
+  <body>
+    
+    <div id="container">
+      
+      <?php
+        if($this->sessionset)
+      		include('navi_login.php');
+      	else
+      		include('navi_default.php');
+      ?>
+     
+      <div id="main" class="normal">
+      
+          <p class="big"><u>Musikzuordnung</u></p>
+          
+          <br><br>
+          
+         		 <form action="/Choose" enctype="multipart/form-data" method="post" name="options" AUTOCOMPLETE = "off">
+              		<table columns="3">
+                      <tr>
+                        <td colspan="3"><b>Playlist bearbeiten</b></td>
+                      </tr>
+                      <tr>
+                      	 <td colspan="2">Playlist: </td>
+                      	 <td>
+                      	 	<select name="list" size="1">
+                               <?php 
+                                
+                                foreach($this->playlists as $playlist) 
+                                {
+                                  echo '<option value="'.$playlist["ID"].'">'.$playlist["Name"].'</option>';
+                                }
+                              
+                              ?>
+                          	</select>
+                        </td>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td><input name="edit" type="submit" value="bearbeiten"></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                    </table>
+              	</form>
+              	
+             <br><br>
+             
+             <?php 
+             
+             if(isset($this->choose))
+             {
+             	echo 
+             	'
+             	<form action="/Choose/choose" enctype="multipart/form-data" method="post" id="choosing" AUTOCOMPLETE = "off">
+				    <table cellspacing="5">
+				    <tr>
+				        <td>
+				            <select multiple="multiple" size="8" name="available[]" id="available">';
+				        
+             					$chosenSongs = array();
+             					
+             					foreach($this->choose as $chosenMusic)
+             					{
+             						array_push($chosenSongs, $chosenMusic["MID"]);
+             					}
+                                
+                                foreach($this->music as $allMusic) 
+                                {
+                                  if(!in_array($allMusic["ID"],$chosenSongs))
+                                	echo '<option value="'.$allMusic["ID"].'">'.$allMusic["Name"].'</option>';
+                                }
+                              
+                           
+				           echo '</select>
+				        </td>
+				        <td align="center">
+				            <button type="button" onclick="moveItems(document.getElementById(\'choosing\').available, document.getElementById(\'choosing\').selection);"> -> </button><br /><br />
+				            <button type="button" onclick="moveItems(document.getElementById(\'choosing\').selection, document.getElementById(\'choosing\').available);"> <- </button><br /><br />
+				        </td>
+				        <td>
+				            <select multiple="multiple" size="8" name="selection[]" id="selection">';
+				        
+                                
+                                foreach($this->choose as $chosenMusic) 
+                                {
+                                	echo '<option value="'.$chosenMusic["MID"].'">'.$chosenMusic["Name"].'</option>';
+                                }
+                              
+                           
+				           echo '
+				
+				            </select>
+				        </td>
+				    </tr>
+				    <tr>
+				    	<td><input type="hidden" name="playlist" value="'.$this->playlist.'"</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+				    </tr>
+				
+				    </table>
+				
+				  <button type="button" ytype="save" onclick="do_submit();">Übernehmen</button>
+				
+				</form>
+             	';
+             }
+             
+             ?>
+
+      
+      </div>
+    
+    </div>
+    
+  </body>
+  
+</html>

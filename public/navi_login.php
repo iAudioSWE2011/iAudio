@@ -12,6 +12,7 @@ if($_SESSION["navi"] == "Verwaltung")
       <ul id="naviklein">
         <li><a href="/Music">Musik</a></li>
         <li><a href="/Playlist">Playlisten</a></li>
+        <li><a href="/Choose">Zuordnung</a></li>
       </ul>';
 
 

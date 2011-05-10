@@ -105,7 +105,7 @@ class MusicController extends Zend_Controller_Action
 				else
 					$wrong_extension = "true";
 		   }
-		   else if ($error == UPLOAD_ERR_INI_SIZE)
+		   else
 		   	$wrong_filesize = "true";
 		}
     	
