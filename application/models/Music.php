@@ -27,7 +27,7 @@ class Music extends Zend_Db_Table_Abstract {
 	 * @param string $link128 Link zu 128kbit/s file
 	 * @param string $link192 Link zu 192kbit/s file
 	 */
-	public function addMusic($uid,$name,$link64,$link128,$link192) {
+	public function addMusic($uid,$name,$link64,$link128,$link192,$location64,$location128,$location192) {
 		
 		$row = $this->createRow();
 	   	$row->UID = $uid;
@@ -35,6 +35,9 @@ class Music extends Zend_Db_Table_Abstract {
 	   	$row->Link64 = $link64;
 	   	$row->Link128 = $link128;
 	   	$row->Link192 = $link192;
+	   	$row->Location64 = $location64;
+	   	$row->Location128 = $location128;
+	   	$row->Location192 = $location192;
         
         $row->save();
 	}
@@ -78,6 +81,49 @@ class Music extends Zend_Db_Table_Abstract {
         return $link->Link192;
 	}
 	
+	
+	
+	/**
+	 * getMusic
+	 * 
+	 * @param int $id File ID
+	 * @return string $link64 Link zu 64kbit/s file
+	 */
+	public function getLocation64($id) {
+		
+		$link = $this->fetchRow($this->select()->where('ID = ?', $id));
+        
+        return $link->Location64;
+	}
+	
+	/**
+	 * getMusic
+	 * 
+	 * @param int $id File ID
+	 * @return string $link128 Link zu 128kbit/s file
+	 */
+	public function getLocation128($id) {
+		
+		$link = $this->fetchRow($this->select()->where('ID = ?', $id));
+        
+        return $link->Location128;
+	}
+	
+	/**
+	 * getMusic
+	 * 
+	 * @param int $id File ID
+	 * @return string $link192 Link zu 192kbit/s file
+	 */
+	public function getLocation192($id) {
+		
+		$link = $this->fetchRow($this->select()->where('ID = ?', $id));
+        
+        return $link->Location192;
+	}
+	
+
+	
 	/**
 	 * getMusic
 	 * 
@@ -103,9 +149,9 @@ class Music extends Zend_Db_Table_Abstract {
 		$playlistmusic->deleteMusicMID($id);
 		
 		$link = $this->fetchRow($this->select()->where('ID = ?', $id));
-		unlink($link->Link64);
-		unlink($link->Link128);
-		unlink($link->Link192);
+		unlink($link->Location64);
+		unlink($link->Location128);
+		unlink($link->Location192);
 		
 		//delete Music
         $this->delete(

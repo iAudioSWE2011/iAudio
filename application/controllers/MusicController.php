@@ -43,7 +43,7 @@ class MusicController extends Zend_Controller_Action
 
     	//create folder if not exists
     	if(!is_dir($uploaddir))
-    		mkdir($uploaddir,0644);
+    		mkdir($uploaddir,0755);
     	
     	//handle each file
 		foreach ($_FILES["files"]["error"] as $key => $error) 
@@ -61,6 +61,7 @@ class MusicController extends Zend_Controller_Action
 		   		if(in_array(strtolower($datei_endung),$zul_endungen))
 				{
 			   	   $filelocation = $uploaddir.$_FILES["files"]["name"][$key];
+			   	   $iplocation = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$_FILES["files"]["name"][$key];
 			   	
 			   	   if (file_exists($filelocation))
 			       {
@@ -72,6 +73,7 @@ class MusicController extends Zend_Controller_Action
 						$i=1;
 						$gibt='true';
 						$filelocation = $uploaddir.$str_teil1.'['.$i.']'.$str_teil2;
+						$iplocation = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$str_teil1.'['.$i.']'.$str_teil2;
 						
 						//do until index is new
 						if (file_exists($filelocation))
@@ -80,6 +82,7 @@ class MusicController extends Zend_Controller_Action
 							{
 								$name = $str_teil1.'['.$i.']'.$str_teil2;
 								$filelocation = $uploaddir.$name;
+								$iplocation = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$name;
 								if (file_exists($filelocation))
 								{
 									$gibt = 'true';
@@ -102,7 +105,7 @@ class MusicController extends Zend_Controller_Action
 			       $punkt = strrpos($_FILES["files"]["name"][$key],".");
 				   $name = substr($_FILES["files"]["name"][$key],0,$punkt); 
 			       
-			       $music->addMusic($uid, $name, $filelocation, $filelocation, $filelocation);
+			       $music->addMusic($uid, $name, $iplocation, $iplocation, $iplocation, $filelocation, $filelocation, $filelocation);
 				}
 				else
 					$wrong_extension = "true";
