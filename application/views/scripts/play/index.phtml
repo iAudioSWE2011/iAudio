@@ -41,7 +41,10 @@ $_SESSION['navi'] = "";
                                 
                                 foreach($this->playlists as $playlist) 
                                 {
-                                  echo '<option value="'.$playlist["ID"].'">'.$playlist["Name"].'</option>';
+                                  if(isset($this->listid) AND $this->listid == $playlist["ID"])
+                                		echo '<option value="'.$playlist["ID"].'" selected>'.$playlist["Name"].'</option>';
+                                  else 
+                                  		echo '<option value="'.$playlist["ID"].'">'.$playlist["Name"].'</option>';
                                 }
                               
                               ?>

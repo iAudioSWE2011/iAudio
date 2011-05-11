@@ -64,6 +64,7 @@ class PlayController extends Zend_Controller_Action
 			fclose($fh);
     	
 			$this->view->m3u = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$choose.".m3u";
+			$this->view->listid = $choose;
     	}
         
     	$exists = $session->exists($sessionid);
