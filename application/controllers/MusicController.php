@@ -39,6 +39,12 @@ class MusicController extends Zend_Controller_Action
     	$session = new Session();
     	$uid = $session->getUserID(session_id());
     	
+    	$uploaddir = $_SERVER["DOCUMENT_ROOT"] . "/upload/";
+
+    	//create folder if not exists
+    	if(!is_dir($uploaddir))
+    		mkdir($uploaddir,0777);
+    	
     	$uploaddir = $_SERVER["DOCUMENT_ROOT"] . "/upload/" . $uid ."/";
 
     	//create folder if not exists
