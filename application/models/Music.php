@@ -27,11 +27,13 @@ class Music extends Zend_Db_Table_Abstract {
 	 * @param string $link128 Link zu 128kbit/s file
 	 * @param string $link192 Link zu 192kbit/s file
 	 */
-	public function addMusic($uid,$name,$link64,$link128,$link192,$location64,$location128,$location192) {
+	public function addMusic($uid,$name,$artist, $title,$link64,$link128,$link192,$location64,$location128,$location192) {
 		
 		$row = $this->createRow();
 	   	$row->UID = $uid;
 	   	$row->Name = $name;
+	   	$row->Artist = $artist;
+	   	$row->Title = $title;
 	   	$row->Link64 = $link64;
 	   	$row->Link128 = $link128;
 	   	$row->Link192 = $link192;

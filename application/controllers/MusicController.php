@@ -101,17 +101,27 @@ class MusicController extends Zend_Controller_Action
 						}
 			       }
 			   	
+			       $ID3 = mp3info($_FILES["files"]["tmp_name"][$key]);
+			       
+			       $artist = $ID3[artist];
+			       $title = $ID3[title];
+			       
 			   	   move_uploaded_file(
 			         $_FILES["files"]["tmp_name"][$key],
 			         $filelocation
 			       );
-			       
-			       chmod ("/somedir/somefile", 0644);
-			       
+
+
 			       $punkt = strrpos($_FILES["files"]["name"][$key],".");
-				   $name = substr($_FILES["files"]["name"][$key],0,$punkt); 
+				   $name = substr($_FILES["files"]["name"][$key],0,$punkt);
+				   
+				   if($title == "")
+				   		$title = $name;
+				   		
+				   if($artist == "")
+				   		$artist = " unknown ";
 			       
-			       $music->addMusic($uid, $name, $iplocation, $iplocation, $iplocation, $filelocation, $filelocation, $filelocation);
+			       $music->addMusic($uid, $name, $artist, $title, $iplocation, $iplocation, $iplocation, $filelocation, $filelocation, $filelocation);
 				}
 				else
 					$wrong_extension = "true";
@@ -146,4 +156,3 @@ class MusicController extends Zend_Controller_Action
 
 
 }
-

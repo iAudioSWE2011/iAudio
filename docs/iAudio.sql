@@ -33,6 +33,8 @@ CREATE TABLE IF NOT EXISTS `music` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `UID` int(11) NOT NULL,
   `Name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `Artist` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `Title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `Link64` text COLLATE utf8_unicode_ci NOT NULL,
   `Link128` text COLLATE utf8_unicode_ci NOT NULL,
   `Link192` text COLLATE utf8_unicode_ci NOT NULL,
@@ -41,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `music` (
   `Location192` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `UID` (`UID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
 -- Daten für Tabelle `music`

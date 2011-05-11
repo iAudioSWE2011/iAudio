@@ -38,4 +38,36 @@ function fixFilesArray(&$files)
     }
 }
 
+function mp3info($file)
+{
+    $fp = fopen($file, "rb");
+    if (!$fp) return 0;
+    
+    // Try to find ID3v1.x
+    fseek($fp, filesize($file)-128);
+    $id3v1 = fread($fp, 128);
+    if (substr($id3v1, 0, 3) == "TAG")
+    { // Yay!
+        $mp3[title] = trim(substr($id3v1, 3, 30));
+        $mp3[artist] = trim(substr($id3v1, 33, 30));
+        $mp3[album] = trim(substr($id3v1, 63, 30));
+        $mp3[year] = trim(substr($id3v1, 93, 4));
+        if (substr($id3v1, 125, 1) == "\0" && substr($id3v1, 126, 1) != "\0")
+        { // we got a ID3v1.1 here
+            $mp3[comment] = trim(substr($id3v1, 97, 29));
+            $mp3[track] = ord(substr($id3v1, 126, 1));
+        }
+        else
+        { // old ID3v1
+            $mp3[comment] = trim(substr($id3v1, 97, 30));
+        }
+        $mp3[genre] = ord(substr($id3v1, 127, 1));
+    }
+    else $mp3 = 0;
+
+    fclose($fp);
+
+    return $mp3;
+}  
+
 ?>

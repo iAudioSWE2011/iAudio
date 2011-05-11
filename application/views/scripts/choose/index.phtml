@@ -64,9 +64,12 @@ $_SESSION['navi'] = "Verwaltung";
 		<td colspan="2">Playlist:</td>
 		<td><select name="list" size="1" style="width: 205px;">
                                <?php
-                            foreach ($this->playlists as $playlist) {
-                                echo '<option value="' . $playlist["ID"] . '">' .
-                                 $playlist["Name"] . '</option>';
+                            foreach ($this->playlists as $playlist) 
+                            {
+                                if(isset($this->choose) AND $this->choose == $playlist["ID"])
+	                            	echo '<option value="' . $playlist["ID"] . '" selected>' .$playlist["Name"] . '</option>';
+	                            else 
+	                            	echo '<option value="' . $playlist["ID"] . '">' .$playlist["Name"] . '</option>';
                             }
                             ?>
                           	</select></td>
@@ -109,7 +112,7 @@ $_SESSION['navi'] = "Verwaltung";
                 foreach ($this->music as $allMusic) {
                     if (! in_array($allMusic["ID"], $chosenSongs))
                         echo '<option value="' . $allMusic["ID"] . '">' .
-                         $allMusic["Name"] . '</option>';
+                         $allMusic["Title"] . ' ('.$allMusic["Artist"].')</option>';
                 }
                 echo '</select>
 				        </td>
@@ -121,7 +124,7 @@ $_SESSION['navi'] = "Verwaltung";
 				            <select name="selection[]" id="selection" size="8" multiple="multiple" style="width: 300px;">';
                 foreach ($this->choose as $chosenMusic) {
                     echo '<option value="' . $chosenMusic["MID"] . '">' .
-                     $chosenMusic["Name"] . '</option>';
+                     $chosenMusic["Title"] . ' ('.$chosenMusic["Artist"].')</option>';
                 }
                 echo '
 				
