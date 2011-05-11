@@ -57,15 +57,15 @@ $_SESSION['navi'] = "Verwaltung";
                       </tr>
                       <tr>
                         <td colspan="2">Auswahl: </td>
-                        <td><input name="files[]" type="file"></td>
+                        <td><input name="files[]" type="file" style="width: 400px;"/></td>
                       </tr>
                       <tr>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td><input type="hidden" name="MAX_FILE_SIZE" value="100000000" /></td>
+                        <td>&nbsp;</td>
                       </tr>
                       <tr>
-                        <td><input name="create" type="submit" value="hochladen"></td>
+                        <td><input name="create" type="submit" value="Hochladen"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                       </tr>
@@ -102,7 +102,7 @@ $_SESSION['navi'] = "Verwaltung";
                       <tr>
                       	 <td colspan="2">Song: </td>
                       	 <td>
-                      	 	<select name="id" size="1">
+                      	 	<select name="id" size="1" style="width: 415px;">
                                <?php 
                                 
                                 foreach($this->music as $music) 
@@ -119,7 +119,7 @@ $_SESSION['navi'] = "Verwaltung";
                         <td>&nbsp;</td>
                       </tr>
                       <tr>
-                        <td><input name="delete" type="submit" value="löschen"></td>
+                        <td><input name="delete" type="submit" value="Löschen"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                       </tr>

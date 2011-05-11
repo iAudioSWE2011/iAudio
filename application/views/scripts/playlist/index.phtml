@@ -55,7 +55,7 @@ $_SESSION['navi'] = "Verwaltung";
                       </tr>
                       <tr>
                         <td colspan="2">Bezeichnung: </td>
-                        <td><input type="text" name="name"></td>
+                        <td><input name="name" type="text" style="width: 250px;"/></td>
                       </tr>
                       <tr>
                         <td>&nbsp;</td>
@@ -63,7 +63,7 @@ $_SESSION['navi'] = "Verwaltung";
                         <td>&nbsp;</td>
                       </tr>
                       <tr>
-                        <td><input name="create" type="submit" value="anlegen"></td>
+                        <td><input name="create" type="submit" value="Anlegen"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                       </tr>
@@ -104,7 +104,7 @@ $_SESSION['navi'] = "Verwaltung";
                       <tr>
                       	 <td colspan="2">Playlist: </td>
                       	 <td>
-                      	 	<select name="id" size="1">
+                      	 	<select name="id" size="1" style="width: 220px;">
                                <?php 
                                 
                                 foreach($this->playlists as $playlist) 
@@ -117,7 +117,7 @@ $_SESSION['navi'] = "Verwaltung";
                         </td>
                       <tr>
                         <td colspan="2">Neue Bezeichnung: </td>
-                        <td><input type="text" name="newname"></td>
+                        <td><input name="newname" type="text" style="width: 213px;"/></td>
                       </tr>
                       <tr>
                         <td>&nbsp;</td>
@@ -125,7 +125,7 @@ $_SESSION['navi'] = "Verwaltung";
                         <td>&nbsp;</td>
                       </tr>
                       <tr>
-                        <td><input name="rename" type="submit" value="umbenennen"></td>
+                        <td><input name="rename" type="submit" value="Umbenennen"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                       </tr>
@@ -162,7 +162,7 @@ $_SESSION['navi'] = "Verwaltung";
                       <tr>
                       	 <td colspan="2">Playlist: </td>
                       	 <td>
-                      	 	<select name="id" size="1">
+                      	 	<select name="id" size="1" style="width: 260px;">
                                <?php 
                                 
                                 foreach($this->playlists as $playlist) 
@@ -179,7 +179,7 @@ $_SESSION['navi'] = "Verwaltung";
                         <td>&nbsp;</td>
                       </tr>
                       <tr>
-                        <td><input name="delete" type="submit" value="löschen"></td>
+                        <td><input name="delete" type="submit" value="Löschen"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                       </tr>

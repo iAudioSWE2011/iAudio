@@ -5,11 +5,11 @@ $_SESSION['navi'] = "Verwaltung";
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>iAudio</title>
-    <link rel="stylesheet" type="text/css" href="scripts/main.css">
-    <script type="text/javascript">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>iAudio</title>
+<link rel="stylesheet" type="text/css" href="scripts/main.css">
+<script type="text/javascript">
 
 	    function do_submit() 
 	    {
@@ -34,108 +34,103 @@ $_SESSION['navi'] = "Verwaltung";
 		}
 		
 	</script>
-  </head>
+</head>
 
-  <body>
-    
-    <div id="container">
+<body>
+
+<div id="container">
       
       <?php
-        if($this->sessionset)
-      		include('navi_login.php');
-      	else
-      		include('navi_default.php');
-      ?>
+    if ($this->sessionset)
+        include ('navi_login.php');
+    else
+        include ('navi_default.php');
+    ?>
      
       <div id="main" class="normal">
-      
-          <p class="big"><u>Musikzuordnung</u></p>
-          
-          <br><br>
-          
-         		 <form action="/Choose" enctype="multipart/form-data" method="post" name="options" AUTOCOMPLETE = "off">
-              		<table columns="3">
-                      <tr>
-                        <td colspan="3"><b>Playlist bearbeiten</b></td>
-                      </tr>
-                      <tr>
-                      	 <td colspan="2">Playlist: </td>
-                      	 <td>
-                      	 	<select name="list" size="1">
-                               <?php 
-                                
-                                foreach($this->playlists as $playlist) 
-                                {
-                                  echo '<option value="'.$playlist["ID"].'">'.$playlist["Name"].'</option>';
-                                }
-                              
-                              ?>
-                          	</select>
-                        </td>
-                      <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                      </tr>
-                      <tr>
-                        <td><input name="edit" type="submit" value="bearbeiten"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                      </tr>
-                    </table>
-              	</form>
-              	
-             <br><br>
+
+<p class="big"><u>Musikzuordnung</u></p>
+
+<br>
+<br>
+
+<form action="/Choose" enctype="multipart/form-data" method="post"
+	name="options" AUTOCOMPLETE="off">
+<table columns="3">
+	<tr>
+		<td colspan="3"><b>Playlist bearbeiten</b></td>
+	</tr>
+	<tr>
+		<td colspan="2">Playlist:</td>
+		<td><select name="list" size="1" style="width: 205px;">
+                               <?php
+                            foreach ($this->playlists as $playlist) {
+                                echo '<option value="' . $playlist["ID"] . '">' .
+                                 $playlist["Name"] . '</option>';
+                            }
+                            ?>
+                          	</select></td>
+	
+	
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td><input name="edit" type="submit" value="Bearbeiten"></td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+</table>
+</form>
+
+<br>
+<br>
              
-             <?php 
-             
-             if(isset($this->choose))
-             {
-             	echo 
-             	'
+             <?php
+            if (isset($this->choose)) {
+                echo '
              	<form action="/Choose/choose" enctype="multipart/form-data" method="post" id="choosing" AUTOCOMPLETE = "off">
 				    <table cellspacing="5">
+				    	<tr>
+	                        <td>Verfügbare Lieder</td>
+	                        <td>&nbsp;</td>
+	                        <td>Lieder in Playliste</td>
+                      	</tr>
+				    
 				    <tr>
 				        <td>
-				            <select multiple="multiple" size="8" name="available[]" id="available">';
-				        
-             					$chosenSongs = array();
-             					
-             					foreach($this->choose as $chosenMusic)
-             					{
-             						array_push($chosenSongs, $chosenMusic["MID"]);
-             					}
-                                
-                                foreach($this->music as $allMusic) 
-                                {
-                                  if(!in_array($allMusic["ID"],$chosenSongs))
-                                	echo '<option value="'.$allMusic["ID"].'">'.$allMusic["Name"].'</option>';
-                                }
-                              
-                           
-				           echo '</select>
+				            <select name="available[]" id="available" size="8" multiple="multiple" style="width: 300px;">';
+                $chosenSongs = array();
+                foreach ($this->choose as $chosenMusic) {
+                    array_push($chosenSongs, $chosenMusic["MID"]);
+                }
+                foreach ($this->music as $allMusic) {
+                    if (! in_array($allMusic["ID"], $chosenSongs))
+                        echo '<option value="' . $allMusic["ID"] . '">' .
+                         $allMusic["Name"] . '</option>';
+                }
+                echo '</select>
 				        </td>
 				        <td align="center">
 				            <button type="button" onclick="moveItems(document.getElementById(\'choosing\').available, document.getElementById(\'choosing\').selection);"> -> </button><br /><br />
 				            <button type="button" onclick="moveItems(document.getElementById(\'choosing\').selection, document.getElementById(\'choosing\').available);"> <- </button><br /><br />
 				        </td>
 				        <td>
-				            <select multiple="multiple" size="8" name="selection[]" id="selection">';
-				        
-                                
-                                foreach($this->choose as $chosenMusic) 
-                                {
-                                	echo '<option value="'.$chosenMusic["MID"].'">'.$chosenMusic["Name"].'</option>';
-                                }
-                              
-                           
-				           echo '
+				            <select name="selection[]" id="selection" size="8" multiple="multiple" style="width: 300px;">';
+                foreach ($this->choose as $chosenMusic) {
+                    echo '<option value="' . $chosenMusic["MID"] . '">' .
+                     $chosenMusic["Name"] . '</option>';
+                }
+                echo '
 				
 				            </select>
 				        </td>
 				    </tr>
 				    <tr>
-				    	<td><input type="hidden" name="playlist" value="'.$this->playlist.'"</td>
+				    	<td><input type="hidden" name="playlist" value="' .
+                 $this->playlist . '"</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
 				    </tr>
@@ -146,15 +141,14 @@ $_SESSION['navi'] = "Verwaltung";
 				
 				</form>
              	';
-             }
-             
-             ?>
+            }
+            ?>
 
       
       </div>
-    
-    </div>
-    
-  </body>
-  
+
+</div>
+
+</body>
+
 </html>
