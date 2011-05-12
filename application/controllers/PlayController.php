@@ -31,16 +31,23 @@ class PlayController extends Zend_Controller_Action
     	{		    	
     		$choose =  $this->_getParam('list');
     		$streamrate = $user->getStreamingRateByID($uid);
+    		$count = $playlist->getCount($choose);
     		
     		$uploaddir = $_SERVER["DOCUMENT_ROOT"] . "/upload/" . $uid ."/";
-    		$filename = $uploaddir.$choose.'.m3u';
+    		$old_filename = $uploaddir.$choose.'_'.$count.'.m3u';    		
+    			
+	    	if (file_exists($old_filename)) 
+				unlink($old_filename);
+				
+			$count++;
+			$playlist->setCount($choose, $count);
     		
-	    	if (file_exists($filename)) 
-				unlink($filename);
+    		$filename = $uploaddir.$choose.'_'.$count.'.m3u';
+    		$musiclist = $playlistmusic->getMusicWithName($choose);	
 				
 		    $output = "";
 		    
-		    foreach($playlistmusic->getMusicWithName($choose) as $title)
+		    foreach($musiclist as $title)
 		    {
 		    	if($streamrate == "64")
 		    	{
@@ -63,8 +70,9 @@ class PlayController extends Zend_Controller_Action
 			fwrite($fh, $output);
 			fclose($fh);
     	
-			$this->view->m3u = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$choose.".m3u";
+			$this->view->m3u = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$choose."_".$count.".m3u";
 			$this->view->listid = $choose;
+			$this->view->music = $musiclist;
     	}
         
     	$exists = $session->exists($sessionid);

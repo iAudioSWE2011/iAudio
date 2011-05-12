@@ -44,10 +44,7 @@ $_SESSION['navi'] = "";
                                 foreach($this->playlists as $playlist) 
                                 {
                                   if(isset($this->listid) AND $this->listid == $playlist["ID"])
-                                  {
                                 		echo '<option value="'.$playlist["ID"].'" selected>'.$playlist["Name"].'</option>';
-                                		$name = $playlist["Name"];
-                                  }
                                   else 
                                   		echo '<option value="'.$playlist["ID"].'">'.$playlist["Name"].'</option>';
                                 }
@@ -76,7 +73,26 @@ $_SESSION['navi'] = "";
              {
              	echo 
              	'
-				<b><i>Es wird gerade die Playliste \''.$name.'\' abgespielt.</i></b>
+				<table>
+					<tr>
+						<td style="width: 200px;"><b>Artist</b></td>
+						<td style="width: 200px;"><b>Titel</b></td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+					</tr>';
+             	
+             		foreach($this->music as $song)
+             		{
+             			echo '
+             			<tr>
+							<td>'.$song["Artist"].'</td>
+							<td>'.$song["Title"].'</td>
+						</tr>';
+             		}
+             	
+				echo '
+             	</table>
 				
 				<!This code for Netscape>
 				<OBJECT ID="MediaPlayer"

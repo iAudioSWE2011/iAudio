@@ -19,18 +19,18 @@ class PlaylistMusic extends Zend_Db_Table_Abstract {
 	protected $_name = 'playlistmusic';
 
 	/**
-	 * saveMusic
+	 * addMusic
 	 * 
 	 * @param int $mid Music ID
-	 * @param $pid $mid Playlist ID
-	 * @param string $link128 Link zu 128kbit/s file
-	 * @param string $link192 Link zu 192kbit/s file
+	 * @param int $pid Playlist ID
+	 * @param int $order order within playlist
 	 */
-	public function addMusic($mid,$pid) {
+	public function addMusic($mid,$pid,$order) {
 		
 		$row = $this->createRow();
 	   	$row->MID = $mid;
 	   	$row->PID = $pid;
+	   	$row->Number = $order;
         
         $row->save();
 	}
@@ -59,7 +59,8 @@ class PlaylistMusic extends Zend_Db_Table_Abstract {
 		$select = $this->select(Zend_Db_Table::SELECT_WITH_FROM_PART);
 		$select->setIntegrityCheck(false)
 		       ->join('music', 'music.ID = playlistmusic.MID')
-		       ->where('playlistmusic.PID = ?', $pid);
+		       ->where('playlistmusic.PID = ?', $pid)
+		       ->order('playlistmusic.Number ASC');
  
 		$rows = $this->fetchAll($select);
         

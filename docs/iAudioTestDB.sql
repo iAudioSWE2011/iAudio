@@ -61,9 +61,10 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `UID` int(11) NOT NULL,
-  PRIMARY KEY (`ID`,`UID`),
+  `Count` int(11) NOT NULL,
+  PRIMARY KEY (`ID`),
   KEY `UID` (`UID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
 -- Daten für Tabelle `playlist`

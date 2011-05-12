@@ -32,6 +32,7 @@ class Playlist extends Zend_Db_Table_Abstract {
 	   	
 		$row->Name = $name;
 	   	$row->UID = $uid;
+	   	$row->Count = 0;
         
         $pid = $row->save();
  
@@ -111,6 +112,33 @@ class Playlist extends Zend_Db_Table_Abstract {
 		$playlist = $this->fetchRow($this->select()->where('ID = ?', $id)); 
 		
         $playlist->Name = $name;
+        
+        $playlist->save();
+	}
+	
+	/**
+	 * Gets the amount of times, the playlist was played
+	 * 
+	 * @param int $id ID of Playlist
+	 */
+	public function getCount($id) {
+
+		$playlist = $this->fetchRow($this->select()->where('ID = ?', $id)); 
+		
+        return $playlist->Count;
+	}
+	
+	/**
+	 * Sets the amount of times, the playlist was played
+	 * 
+	 * @param int $id ID of Playlist
+	 * @param int $count amount of Playlist starts
+	 */
+	public function setCount($id, $count) {
+
+		$playlist = $this->fetchRow($this->select()->where('ID = ?', $id)); 
+		
+        $playlist->Count = $count;
         
         $playlist->save();
 	}

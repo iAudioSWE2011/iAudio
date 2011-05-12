@@ -53,8 +53,8 @@ class ChooseController extends Zend_Controller_Action
     	
     	$playlistmusic->deleteMusicPID($playlist);
     	
-    	foreach($choose as $mid)
-			$playlistmusic->addMusic($mid, $playlist);
+    	for($i=1;$i<=count($choose);$i++)
+    		$playlistmusic->addMusic($choose[$i-1], $playlist, $i);
 			
 		 $this->_redirect('/Choose?saved=true'); 
     }
