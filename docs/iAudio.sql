@@ -81,6 +81,7 @@ DROP TABLE IF EXISTS `playlistmusic`;
 CREATE TABLE IF NOT EXISTS `playlistmusic` (
   `MID` int(11) NOT NULL,
   `PID` int(11) NOT NULL,
+  `Number` int(11) NOT NULL,
   PRIMARY KEY (`MID`,`PID`),
   KEY `PID` (`PID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
