@@ -78,6 +78,7 @@ class MusicController extends Zend_Controller_Action
 						$str_teil2 = strchr($filelocation,".");
 						$i=1;
 						$gibt='true';
+						$datei_name = $str_teil1.'['.$i.']';
 						$filelocation = $uploaddir.$str_teil1.'['.$i.']'.$str_teil2;
 						$iplocation = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$str_teil1.'['.$i.']'.$str_teil2;
 						
@@ -88,7 +89,9 @@ class MusicController extends Zend_Controller_Action
 							{
 								$name = $str_teil1.'['.$i.']'.$str_teil2;
 								$filelocation = $uploaddir.$name;
+								$datei_name = $str_teil1.'['.$i.']';
 								$iplocation = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$name;
+								
 								if (file_exists($filelocation))
 								{
 									$gibt = 'true';
@@ -120,8 +123,26 @@ class MusicController extends Zend_Controller_Action
 				   		
 				   if($artist == "")
 				   		$artist = " unknown ";
-			       
-			       $music->addMusic($uid, $name, $artist, $title, $iplocation, $iplocation, $iplocation, $filelocation, $filelocation, $filelocation);
+
+				   	$os = 2;
+				   		
+			       	if($os==1)
+			       		$music->addMusic($uid, $name, $artist, $title, $iplocation, $iplocation, $iplocation, $filelocation, $filelocation, $filelocation);
+					else  
+					{
+						$ip64 = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$datei_name."_64.mp3";
+						$ip128 = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$datei_name."_128.mp3";
+						$ip192 = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$datei_name."_192.mp3";
+						$file64 = $uploaddir.$datei_name."_64.mp3";
+						$file128 = $uploaddir.$datei_name."_128.mp3";
+						$file192 = $uploaddir.$datei_name."_192.mp3";
+						
+						shell_exec("lame -h -b 64 $filelocation $file64");
+						shell_exec("lame -h -b 128 $filelocation $file128");
+						shell_exec("lame -h -b 192 $filelocation $file192");
+						
+						$music->addMusic($uid, $name, $artist, $title, $ip64, $ip128, $ip192, $file64, $file128, $file192);
+					}
 				}
 				else
 					$wrong_extension = "true";
