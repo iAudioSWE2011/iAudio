@@ -123,10 +123,10 @@ class MusicController extends Zend_Controller_Action
 				   		
 				   if($artist == "")
 				   		$artist = " unknown ";
-
-				   	$os = 2;
+	
+				   	php_uname(); 	
 				   		
-			       	if($os==1)
+			       	if(PHP_OS!="Linux")
 			       		$music->addMusic($uid, $name, $artist, $title, $iplocation, $iplocation, $iplocation, $filelocation, $filelocation, $filelocation);
 					else  
 					{
