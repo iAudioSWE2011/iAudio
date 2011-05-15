@@ -39,14 +39,9 @@ class MusicController extends Zend_Controller_Action
     	$session = new Session();
     	$uid = $session->getUserID(session_id());
     	
-    	$uploaddir = $_SERVER["DOCUMENT_ROOT"] . "/upload/";
-
-    	//create folder if not exists
-    	if(!is_dir($uploaddir))
-    		mkdir($uploaddir,0777);
-    	
     	$uploaddir = $_SERVER["DOCUMENT_ROOT"] . "/upload/" . $uid ."/";
-
+		$uploaddir = str_replace("public", "application", $uploaddir);
+    	
     	//create folder if not exists
     	if(!is_dir($uploaddir))
     		mkdir($uploaddir,0755);
@@ -67,7 +62,7 @@ class MusicController extends Zend_Controller_Action
 		   		if(in_array(strtolower($datei_endung),$zul_endungen))
 				{
 			   	   $filelocation = $uploaddir.$_FILES["files"]["name"][$key];
-			   	   $iplocation = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$_FILES["files"]["name"][$key];
+			   	   $iplocation = "http://".$_SERVER["HTTP_HOST"]."/tmp/".$uid."/".$_FILES["files"]["name"][$key];
 			   	
 			   	   if (file_exists($filelocation))
 			       {
@@ -80,7 +75,7 @@ class MusicController extends Zend_Controller_Action
 						$gibt='true';
 						$datei_name = $str_teil1.'['.$i.']';
 						$filelocation = $uploaddir.$str_teil1.'['.$i.']'.$str_teil2;
-						$iplocation = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$str_teil1.'['.$i.']'.$str_teil2;
+						$iplocation = "http://".$_SERVER["HTTP_HOST"]."/tmp/".$uid."/".$str_teil1.'['.$i.']'.$str_teil2;
 						
 						//do until index is new
 						if (file_exists($filelocation))
@@ -90,7 +85,7 @@ class MusicController extends Zend_Controller_Action
 								$name = $str_teil1.'['.$i.']'.$str_teil2;
 								$filelocation = $uploaddir.$name;
 								$datei_name = $str_teil1.'['.$i.']';
-								$iplocation = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$name;
+								$iplocation = "http://".$_SERVER["HTTP_HOST"]."/tmp/".$uid."/".$name;
 								
 								if (file_exists($filelocation))
 								{
@@ -130,9 +125,9 @@ class MusicController extends Zend_Controller_Action
 			       		$music->addMusic($uid, $name, $artist, $title, $iplocation, $iplocation, $iplocation, $filelocation, $filelocation, $filelocation);
 					else  
 					{
-						$ip64 = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$datei_name."_64.mp3";
-						$ip128 = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$datei_name."_128.mp3";
-						$ip192 = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$datei_name."_192.mp3";
+						$ip64 = "http://".$_SERVER["HTTP_HOST"]."/tmp/".$uid."/".$datei_name."_64.mp3";
+						$ip128 = "http://".$_SERVER["HTTP_HOST"]."/tmp/".$uid."/".$datei_name."_128.mp3";
+						$ip192 = "http://".$_SERVER["HTTP_HOST"]."/tmp/".$uid."/".$datei_name."_192.mp3";
 						$file64 = $uploaddir.$datei_name."_64.mp3";
 						$file128 = $uploaddir.$datei_name."_128.mp3";
 						$file192 = $uploaddir.$datei_name."_192.mp3";

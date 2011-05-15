@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Session.php';
+require_once 'scripts/functions.php';
 
 class ImpressumController extends Zend_Controller_Action
 {
@@ -19,6 +20,9 @@ class ImpressumController extends Zend_Controller_Action
         $exists = $session->exists($sessionid);
 
 		$this->view->sessionset = $exists;
+		
+		$tmpdir = $_SERVER["DOCUMENT_ROOT"] . "/tmp/" . $session->getUserID($sessionid) ."/";
+        removeFilesInDir($tmpdir);
     }
 
 

@@ -33,7 +33,7 @@ class PlayController extends Zend_Controller_Action
     		$streamrate = $user->getStreamingRateByID($uid);
     		$count = $playlist->getCount($choose);
     		
-    		$uploaddir = $_SERVER["DOCUMENT_ROOT"] . "/upload/" . $uid ."/";
+    		$uploaddir = $_SERVER["DOCUMENT_ROOT"] . "/tmp/" . $uid ."/";
     		$old_filename = $uploaddir.$choose.'_'.$count.'.m3u';    		
     			
 	    	if (file_exists($old_filename)) 
@@ -52,17 +52,35 @@ class PlayController extends Zend_Controller_Action
 		    	if($streamrate == "64")
 		    	{
 		    		$link = $music->getLink64($title["MID"]);
-		    		$output = $output.$link."\n"; 
+		    		$output = $output.$link."\n";
+
+		    		$copy_from = $music->getLocation64($title["MID"]);
+		    		$copy_to = str_replace("upload", "tmp", $copy_from);
+		    		$copy_to = str_replace("application", "public", $copy_to);
+		    		
+		    		copy($copy_from, $copy_to);
 		    	}
 		    	else if($streamrate == "128")
 		    	{
 		    		$link = $music->getLink128($title["MID"]);
-		    		$output = $output.$link."\n"; 
+		    		$output = $output.$link."\n";
+
+		    		$copy_from = $music->getLocation128($title["MID"]);
+		    		$copy_to = str_replace("upload", "tmp", $copy_from);
+		    		$copy_to = str_replace("application", "public", $copy_to);
+		    		
+		    		copy($copy_from, $copy_to);
 		    	}
 		    	else
 		    	{
 		    		$link = $music->getLink192($title["MID"]);
-		    		$output = $output.$link."\n"; 
+		    		$output = $output.$link."\n";
+
+		    		$copy_from = $music->getLocation192($title["MID"]);
+		    		$copy_to = str_replace("upload", "tmp", $copy_from);
+		    		$copy_to = str_replace("application", "public", $copy_to);
+		    		
+		    		copy($copy_from, $copy_to);
 		    	}
 		    }
     		
@@ -70,7 +88,7 @@ class PlayController extends Zend_Controller_Action
 			fwrite($fh, $output);
 			fclose($fh);
     	
-			$this->view->m3u = "http://".$_SERVER["HTTP_HOST"]."/upload/".$uid."/".$choose."_".$count.".m3u";
+			$this->view->m3u = "http://".$_SERVER["HTTP_HOST"]."/tmp/".$uid."/".$choose."_".$count.".m3u";
 			$this->view->listid = $choose;
 			$this->view->music = $musiclist;
     	}

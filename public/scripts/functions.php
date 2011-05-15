@@ -68,6 +68,49 @@ function mp3info($file)
     fclose($fp);
 
     return $mp3;
-}  
+}
+
+function createUploadStructe($uid)
+{
+	$dir = $_SERVER["DOCUMENT_ROOT"] . "/tmp/";
+
+    //create folder if not exists
+    if(!is_dir($dir))
+    	mkdir($dir,0755);
+    	
+    $dir = $dir . $uid ."/";
+
+    //create folder if not exists
+    if(!is_dir($dir))
+    	mkdir($dir,0755);
+    	
+    $dir = $_SERVER["DOCUMENT_ROOT"] . "/upload/";
+    $dir = str_replace("public", "application", $dir);
+
+    //create folder if not exists
+    if(!is_dir($dir))
+    	mkdir($dir,0755);	
+	
+	
+	$dir = $dir . $uid ."/";
+
+    //create folder if not exists
+    if(!is_dir($dir))
+    	mkdir($dir,0755);
+	
+}
+
+function removeFilesInDir($dir) {
+   if (is_dir($dir)) {
+     $objects = scandir($dir);
+     foreach ($objects as $object) {
+       if ($object != "." && $object != "..") {
+         if (filetype($dir."/".$object) == "dir") removeFilesInDir($dir."/".$object); else unlink($dir."/".$object);
+       }
+     }
+     reset($objects);
+   }
+ } 
+
 
 ?>

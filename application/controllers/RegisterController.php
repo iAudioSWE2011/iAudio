@@ -44,10 +44,12 @@ class RegisterController extends Zend_Controller_Action
     	{  			
     		//Insert new User into Database
 	    	$id = $user->createNewUser($name, $mail, $pw);
+	    	
+	    	//create Upload Structure
+	    	createUploadStructe($id);
 	
 	    	//Auto-Login of new Users
-	    	$session->saveSession(session_id(),$id);
-	    	$this->_redirect('/');
+	    	$this->_redirect('/Login/save/mail/'.$mail.'/pw/'.$pw);
     	}    
     }
 

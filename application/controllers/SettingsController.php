@@ -25,6 +25,9 @@ class SettingsController extends Zend_Controller_Action
     	$this->view->currentRate = $user->getStreamingRateByID($uid);
     	$this->view->currentMail = $user->getMailByID($uid);
 		$this->view->sessionset = $exists;
+		
+		$tmpdir = $_SERVER["DOCUMENT_ROOT"] . "/tmp/" . $session->getUserID($sessionid) ."/";
+        removeFilesInDir($tmpdir);
     }
 
     public function streamAction()

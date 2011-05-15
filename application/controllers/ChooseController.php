@@ -37,6 +37,9 @@ class ChooseController extends Zend_Controller_Action
 		$this->view->sessionset = $exists;
 		$this->view->playlists = $playlist->getPlaylists($uid);
 		$this->view->music = $music->getMusicfromUser($uid);
+		
+		$tmpdir = $_SERVER["DOCUMENT_ROOT"] . "/tmp/" . $session->getUserID($sessionid) ."/";
+        removeFilesInDir($tmpdir);
     }
     
     public function chooseAction()

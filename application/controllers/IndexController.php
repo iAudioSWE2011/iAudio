@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Session.php';
+require_once 'scripts/functions.php';
 
 class IndexController extends Zend_Controller_Action
 {
@@ -17,7 +18,10 @@ class IndexController extends Zend_Controller_Action
         $sessionid = session_id();
         
         $exists = $session->exists($sessionid); 
-        $this->view->sessionset = $exists;      
+        $this->view->sessionset = $exists;
+
+        $tmpdir = $_SERVER["DOCUMENT_ROOT"] . "/tmp/" . $session->getUserID($sessionid) ."/";
+        removeFilesInDir($tmpdir);
     }
 
 
