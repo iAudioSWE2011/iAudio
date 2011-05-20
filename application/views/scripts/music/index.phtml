@@ -20,7 +20,7 @@ $_SESSION['navi'] = "Verwaltung";
 
     	function do_submit() 
 	    {
-    	    document.images['loading'].src="img/uploading_neu.gif";
+    	    document.images['loading'].src="img/loading_neu.gif";
 	  	  	document.getElementById('upload').submit();
 	  	}
     </script>
@@ -57,9 +57,9 @@ $_SESSION['navi'] = "Verwaltung";
           	  if(!empty($_REQUEST["upload"]) && $_REQUEST["upload"] == "empty")
 	              echo 'Keine Dateien zum Upload angegeben!';
 	          else if(!empty($_REQUEST["size"]) && $_REQUEST["size"] == "true")
-	              echo 'Einige oder sämtliche Dateien sind größer als 10MB!';
+	              echo 'Die Datei ist größer als 25MB!';
 	          else if(!empty($_REQUEST["extension"]) && $_REQUEST["extension"] == "true")
-	              echo 'Einige oder sämtliche Dateien hatte nicht die Endung .mp3!';
+	              echo 'Es sind nur Dateien mit der Endung .mp3 zugelassen!';
 	          else
 	              echo '&nbsp;';
 	              
