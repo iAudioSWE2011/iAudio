@@ -72,7 +72,7 @@ function mp3info($file)
 
 function createUploadStructe($uid)
 {
-	chmod($_SERVER["DOCUMENT_ROOT"], 777);
+	chmod($_SERVER["DOCUMENT_ROOT"], 0777);
 	$dir = $_SERVER["DOCUMENT_ROOT"] . "/tmp/";
 
     //create folder if not exists
@@ -87,7 +87,7 @@ function createUploadStructe($uid)
     	
     $dir = $_SERVER["DOCUMENT_ROOT"];
     $dir = str_replace("public", "application", $dir);
-	chmod($dir, 777);
+	chmod($dir, 0777);
 	$dir = $dir  . "/upload/";
 	
     //create folder if not exists
