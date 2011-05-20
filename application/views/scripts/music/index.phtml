@@ -9,9 +9,26 @@ $_SESSION['navi'] = "Verwaltung";
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>iAudio</title>
     <link rel="stylesheet" type="text/css" href="scripts/main.css">
+    
+    <script type="text/javascript">
+
+    	function preload()
+    	{
+        	animation = new Image();
+        	animation.src="img/uploading_neu.gif";
+    	}
+
+    	function do_submit() 
+	    {
+    	    document.images['loading'].src="img/uploading_neu.gif";
+	  	  	document.getElementById('upload').submit();
+	  	}
+    </script>
+    
+    
   </head>
 
-  <body>
+  <body onload="preload()">
     
     <div id="container">
       
@@ -50,7 +67,7 @@ $_SESSION['navi'] = "Verwaltung";
           }
           ?>
           
-         		 <form action="/Music/upload" enctype="multipart/form-data" method="post" name="options" AUTOCOMPLETE = "off">
+         		 <form action="/Music/upload" enctype="multipart/form-data" method="post" id="upload" name="options" AUTOCOMPLETE = "off">
               		<table columns="3">
                       <tr>
                         <td colspan="3"><b>Musik hochladen</b></td>
@@ -65,12 +82,17 @@ $_SESSION['navi'] = "Verwaltung";
                         <td>&nbsp;</td>
                       </tr>
                       <tr>
-                        <td><input name="create" type="submit" value="Hochladen"></td>
+                        <td><button type="button" ytype="save" onclick="do_submit();">Hochladen</button></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                       </tr>
                     </table>
               	</form>
+              	
+              	<div style="position: absolute; margin-left: 200px; margin-top: -25px">
+              		<img name="loading" src="img/statisch.gif" width="200px" height="100px" border="0px">
+              	</div>
+              	
               	
              <br><br>
              
