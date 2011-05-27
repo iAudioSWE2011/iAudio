@@ -55,8 +55,7 @@ class PlayController extends Zend_Controller_Action
 		    		$output = $output.$link."\n";
 
 		    		$copy_from = $music->getLocation64($title["MID"]);
-		    		$copy_to = str_replace("upload", "tmp", $copy_from);
-		    		$copy_to = str_replace("application", "public", $copy_to);
+		    		$copy_to = str_replace("music/upload", "public/tmp", $copy_from);
 		    		
 		    		copy($copy_from, $copy_to);
 		    	}
