@@ -131,9 +131,9 @@ class MusicController extends Zend_Controller_Action
 						$file128 = $uploaddir.$datei_name."_128.mp3";
 						$file192 = $uploaddir.$datei_name."_192.mp3";
 						
-						shell_exec(escapeshellcmd("lame -b 64 '$filelocation' '$file64'"));
-						shell_exec(escapeshellcmd("lame -b 128 '$filelocation' '$file128'"));
-						shell_exec(escapeshellcmd("lame -b 192 '$filelocation' '$file192'"));
+						shell_exec("lame -b 64 \"$filelocation\" \"$file64\"");
+						shell_exec("lame -b 128 \"$filelocation\" \"$file128\"");
+						shell_exec("lame -b 192 \"$filelocation\" \"$file192'");
 						
 						unlink($filelocation);
 						
