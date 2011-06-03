@@ -130,10 +130,6 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Daten für Tabelle `user`
 --
 
-INSERT INTO `user` (`ID`, `Name`, `Mail`, `PW`, `Streamingrate`) VALUES
-(1, 'Christian Posselt', 'posselt@hm.edu', '07104e60ccaa86c5cd45f014802327f4', '128'),
-(2, 'Christian Mitterreiter', 'mitterre@iAudio.com', 'faf942e4d5294f73410d74001fc06239', '128');
-
 --
 -- Constraints der exportierten Tabellen
 --
