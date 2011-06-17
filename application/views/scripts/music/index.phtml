@@ -16,12 +16,13 @@ $_SESSION['navi'] = "Verwaltung";
 		
 		function preload()
     	{
-        	top.window.close();
+			Fenster = window.open("/waiting.html","warten","toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbar=no,top=" + (screen.height/2 - 60) + ",left=" + (screen.width/2 - 125) + ",width=250,height=125")
+    	    Fenster.close();
     	}
 
     	function do_submit() 
 	    {
-    	    Fenster = window.open("/waiting.html","warten","toolbar=no,menubar=no,top=300,left=300,width=200,height=100")
+			Fenster = window.open("/waiting.html","warten","toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbar=no,top=" + (screen.height/2 - 60) + ",left=" + (screen.width/2 - 125) + ",width=250,height=125")
     	    Fenster.focus();
 	  	  	document.getElementById('upload').submit();
 	  	}
@@ -59,7 +60,7 @@ $_SESSION['navi'] = "Verwaltung";
           	  if(!empty($_REQUEST["upload"]) && $_REQUEST["upload"] == "empty")
 	              echo 'Keine Dateien zum Upload angegeben!';
 	          else if(!empty($_REQUEST["size"]) && $_REQUEST["size"] == "true")
-	              echo 'Die Datei ist größer als 25MB!';
+	              echo 'Keine gültige Datei angegeben (leer oder größer als 25MB)!';
 	          else if(!empty($_REQUEST["extension"]) && $_REQUEST["extension"] == "true")
 	              echo 'Es sind nur Dateien mit der Endung .mp3 zugelassen!';
 	          else
