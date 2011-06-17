@@ -16,7 +16,8 @@ $_SESSION['navi'] = "Verwaltung";
 		
 		function preload()
     	{
-        	top.window.close();
+			Fenster = window.open("/waiting.html","warten","toolbar=no,menubar=no,top=300,left=300,width=200,height=100")
+    	    Fenster.close();
     	}
 
     	function do_submit() 
