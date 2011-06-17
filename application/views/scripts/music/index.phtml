@@ -11,16 +11,13 @@ $_SESSION['navi'] = "Verwaltung";
     <link rel="stylesheet" type="text/css" href="scripts/main.css">
     
     <script type="text/javascript">
-
-    	function preload()
-    	{
-        	animation = new Image();
-        	animation.src="img/loading_neu.gif";
-    	}
-
+		
+		Fenster = null;
+	
     	function do_submit() 
 	    {
-    	    document.images['loading'].src="img/loading_neu.gif";
+    	    Fenster = window.open("/waiting.html","warten","toolbar=no,menubar=no,top=300,left=300,width=200,height=100")
+    	    Fenster.focus();
 	  	  	document.getElementById('upload').submit();
 	  	}
     </script>
@@ -28,7 +25,7 @@ $_SESSION['navi'] = "Verwaltung";
     
   </head>
 
-  <body onload="preload()">
+  <body>
     
     <div id="container">
       
