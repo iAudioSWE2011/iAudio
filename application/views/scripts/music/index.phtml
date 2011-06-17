@@ -13,7 +13,12 @@ $_SESSION['navi'] = "Verwaltung";
     <script type="text/javascript">
 		
 		Fenster = null;
-	
+		
+		function preload()
+    	{
+        	top.window.close();
+    	}
+
     	function do_submit() 
 	    {
     	    Fenster = window.open("/waiting.html","warten","toolbar=no,menubar=no,top=300,left=300,width=200,height=100")
@@ -25,7 +30,7 @@ $_SESSION['navi'] = "Verwaltung";
     
   </head>
 
-  <body>
+  <body onload="preload()">
     
     <div id="container">
       
